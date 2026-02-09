@@ -1,0 +1,13 @@
+Analyze the following article and generate SEO-optimized metadata:
+
+TITLE: {{.Title}}
+
+CONTENT:
+{{.Content}}
+
+ADDITIONAL CONTEXT:
+- Target audience: {{.TargetAudience}}
+- Site category: {{.Category}}
+- Language: {{.Language}}
+
+Generate metadata following the JSON format specified in the system prompt. Ensure the seo_summary is exactly 150-160 characters for optimal meta description display.

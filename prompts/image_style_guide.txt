@@ -1,0 +1,97 @@
+IMAGE STYLE GUIDE - HUMAN DESIGN AESTHETIC
+===========================================
+
+[MEDIUM SPECIFICATION]
+Define the visual medium clearly:
+- Editorial photography (real-world reference style)
+- Flat graphic design (2D, minimal depth)
+- Watercolor illustration (organic, hand-painted feel)
+- Screen print poster (limited colors, bold shapes)
+- Collage art (mixed media, layered)
+- Line drawing (simple, hand-drawn)
+- Vintage magazine layout (retro typography)
+
+[STYLE REFERENCE]
+Reference real-world design movements, not futuristic concepts:
+- Bauhaus poster (geometric, primary colors, functional)
+- 1970s magazine layout (earthy tones, bold typography)
+- Scandinavian minimalism (clean, functional, natural materials)
+- Swiss typography style (grid-based, sans-serif, mathematical)
+- Mid-century modern (organic shapes, muted colors)
+- Art Deco (geometric patterns, luxury aesthetic)
+- Brutalist design (raw, concrete, honest materials)
+- Japanese minimalism (negative space, natural elements)
+
+[CONSTRAINT LANGUAGE]
+Use words that imply limitation and human decision-making:
+- Limited color palette (3-4 colors maximum)
+- Simple shapes (circles, squares, triangles)
+- Clean composition (organized, intentional)
+- Restrained (holding back, not overdone)
+- Minimal (only essential elements)
+- Flat design (no depth, 2D)
+- Matte finish (no shine or gloss)
+- Single focal point (clear hierarchy)
+- Geometric forms (structured, deliberate)
+
+[EXCLUSION LIST]
+Explicitly avoid AI's default tendencies:
+- No plain white backgrounds - always use color, texture, or photography
+- No low contrast text (text must always be readable against background)
+- No glowing effects or light rays
+- No neon colors or oversaturation
+- No circuit patterns or digital grids
+- No 3D renders or CGI aesthetics
+- No dramatic studio lighting
+- No lens flares or bokeh effects
+- No futuristic aesthetics
+- No chrome or metallic finishes
+- No perfect symmetry or mathematical precision
+- No stock photo people or generic scenes
+- No gradient meshes or smooth blends
+- No holographic or iridescent effects
+
+[BACKGROUND AND CONTRAST REQUIREMENTS]
+Always ensure readable, high-impact visuals:
+- Use rich, colored backgrounds (deep blues, warm earth tones, muted greens, etc.)
+- Textured backgrounds add visual interest (paper grain, fabric, concrete, wood)
+- Photography backgrounds should have depth and context
+- Text contrast is non-negotiable: light text on dark, dark text on light
+- When in doubt, add a subtle text backing or shadow for legibility
+- Avoid pastel-on-pastel or muted-on-muted color combinations for text
+
+[IMPERFECTION REQUESTS]
+Ask for subtle human touches:
+- Slightly off-center composition
+- Hand-drawn quality (imperfect lines)
+- Natural lighting (window light, daylight)
+- Visible texture (paper grain, canvas weave)
+- Analog feel (film photography aesthetic)
+- Weathered or worn elements
+- Uneven spacing (human-placed, not grid-perfect)
+- Color bleeding or registration shifts
+- Subtle asymmetry
+
+[REAL-WORLD CONTEXT]
+Describe where this image would exist in reality:
+- Magazine advertisement (editorial context)
+- Museum poster (art institution)
+- Book cover (literary or non-fiction)
+- Architectural photography (building documentation)
+- Product packaging (consumer goods)
+- Concert poster (event promotion)
+- Album artwork (music industry)
+- Educational infographic (textbook or journal)
+- Corporate brochure (business communication)
+- Gallery exhibition print (fine art)
+
+[IMPLEMENTATION NOTES]
+When generating images:
+1. Choose ONE medium specification
+2. Reference ONE specific style/era
+3. Apply 2-3 constraints from the constraint language
+4. Include 3-5 items from the exclusion list
+5. Add 1-2 imperfection requests
+6. Ground it in ONE real-world context
+
+Example: "Editorial photography in the style of 1970s magazine layouts. Limited earth-tone color palette, clean composition with single focal point, matte finish. No dramatic lighting, no oversaturation, no 3D renders. Natural window lighting, slightly off-center composition, visible film grain. Looks like it would appear in an architectural magazine."

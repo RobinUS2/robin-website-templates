@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Debug Console</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: #2d2d30;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007acc;
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #858585;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: #252526;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #4ec9b0;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #3e3e42;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            color: #9cdcfe;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            background: #3c3c3c;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+        }
+        
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #007acc;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: #0e639c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background: #1177bb;
+        }
+        
+        .btn-danger {
+            background: #d13438;
+        }
+        
+        .btn-danger:hover {
+            background: #e13438;
+        }
+        
+        .btn-success {
+            background: #3c8d3c;
+        }
+        
+        .btn-success:hover {
+            background: #4ca24c;
+        }
+        
+        .token-box {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .token-platform {
+            color: #4ec9b0;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .token-item {
+            margin-bottom: 10px;
+        }
+        
+        .token-label {
+            color: #9cdcfe;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+        
+        .token-value {
+            font-family: 'Courier New', monospace;
+            background: #2d2d30;
+            padding: 8px;
+            border-radius: 3px;
+            word-break: break-all;
+            color: #ce9178;
+            font-size: 0.9rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #858585;
+            padding: 40px;
+            font-style: italic;
+        }
+        
+        .config-value {
+            background: #2d2d30;
+            padding: 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #ce9178;
+            margin-top: 5px;
+        }
+        
+        .help-text {
+            color: #858585;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active {
+            background: #4ec9b0;
+        }
+        
+        .status-inactive {
+            background: #858585;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 OAuth Debug Console</h1>
+            <p class="subtitle">Configure OAuth settings and view stored tokens</p>
+        </header>
+        
+        <div class="grid">
+            <div>
+                <div class="section">
+                    <h2 class="section-title">Configuration</h2>
+                    
+                    <div class="form-group">
+                        <label for="platform-filter">Platform Filter</label>
+                        <select id="platform-filter">
+                            <option value="">All Platforms</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="pinterest">Pinterest</option>
+                            <option value="linkedin">LinkedIn</option>
+                        </select>
+                        <p class="help-text">Only show this platform on the OAuth page</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="redirect-url">Redirect URL</label>
+                        <input type="text" id="redirect-url" placeholder="/oauth-callback.html">
+                        <p class="help-text">Custom callback URL after authorization</p>
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="saveConfig()">Save Configuration</button>
+                    <button class="btn btn-danger" onclick="clearConfig()">Clear Configuration</button>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Platform OAuth URLs</h2>
+                    <p class="help-text" style="margin-bottom: 15px;">Set real platform OAuth URLs to redirect to actual authorization pages instead of simulated flow.</p>
+                    
+                    <div class="form-group">
+                        <label for="tiktok-oauth-url">TikTok OAuth URL</label>
+                        <input type="text" id="tiktok-oauth-url" placeholder="https://www.tiktok.com/v2/auth/authorize/">
+                        <p class="help-text">Default: https://www.tiktok.com/v2/auth/authorize/</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebook-oauth-url">Facebook OAuth URL</label>
+                        <input type="text" id="facebook-oauth-url" placeholder="https://www.facebook.com/v21.0/dialog/oauth">
+                        <p class="help-text">Default: https://www.facebook.com/v21.0/dialog/oauth</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instagram-oauth-url">Instagram OAuth URL</label>
+                        <input type="text" id="instagram-oauth-url" placeholder="https://api.instagram.com/oauth/authorize">
+                        <p class="help-text">Default: https://api.instagram.com/oauth/authorize</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pinterest-oauth-url">Pinterest OAuth URL</label>
+                        <input type="text" id="pinterest-oauth-url" placeholder="https://www.pinterest.com/oauth/">
+                        <p class="help-text">Default: https://www.pinterest.com/oauth/</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="linkedin-oauth-url">LinkedIn OAuth URL</label>
+                        <input type="text" id="linkedin-oauth-url" placeholder="https://www.linkedin.com/oauth/v2/authorization">
+                        <p class="help-text">Default: https://www.linkedin.com/oauth/v2/authorization</p>
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="savePlatformUrls()">Save Platform URLs</button>
+                    <button class="btn btn-danger" onclick="clearPlatformUrls()">Clear Platform URLs</button>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Current Configuration</h2>
+                    <div id="current-config"></div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="section">
+                    <h2 class="section-title">Actions</h2>
+                    <button class="btn" onclick="window.location.href='/oauth.html'">Open OAuth Page</button>
+                    <button class="btn" onclick="window.location.href='/oauth-callback.html'">Open Callback Page</button>
+                    <button class="btn" onclick="refreshTokens()">Refresh Token List</button>
+                    <button class="btn btn-danger" onclick="clearAllTokens()">Clear All Tokens</button>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Quick Tests</h2>
+                    <button class="btn" onclick="testTikTok()">Test TikTok OAuth</button>
+                    <button class="btn" onclick="testInstagram()">Test Instagram OAuth</button>
+                    <button class="btn" onclick="exportTokens()">Export Tokens (JSON)</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Stored Tokens</h2>
+            <div id="tokens-list"></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Raw Token Data (Copy-Paste Ready)</h2>
+            <div id="raw-tokens"></div>
+        </div>
+    </div>
+    
+    <script>
+        function loadConfig() {
+            const platformFilter = localStorage.getItem('oauth_platform_filter') || '';
+            const redirectUrl = localStorage.getItem('oauth_redirect_url') || '';
+            
+            document.getElementById('platform-filter').value = platformFilter;
+            document.getElementById('redirect-url').value = redirectUrl;
+            
+            // Load platform OAuth URLs
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            platforms.forEach(platform => {
+                const url = localStorage.getItem(`oauth_platform_url_${platform}`) || '';
+                const element = document.getElementById(`${platform}-oauth-url`);
+                if (element) {
+                    element.value = url;
+                }
+            });
+            
+            updateCurrentConfig();
+            console.log('[Debug] Loaded configuration:', { platformFilter, redirectUrl });
+        }
+        
+        function updateCurrentConfig() {
+            const platformFilter = localStorage.getItem('oauth_platform_filter') || 'None (show all)';
+            const redirectUrl = localStorage.getItem('oauth_redirect_url') || 'Default (/oauth-callback.html)';
+            
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            let platformUrlsHtml = '';
+            platforms.forEach(platform => {
+                const url = localStorage.getItem(`oauth_platform_url_${platform}`);
+                if (url) {
+                    platformUrlsHtml += `
+                        <div class="token-item">
+                            <div class="token-label">${platform.charAt(0).toUpperCase() + platform.slice(1)} OAuth URL</div>
+                            <div class="config-value">${url}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            document.getElementById('current-config').innerHTML = `
+                <div class="token-item">
+                    <div class="token-label">Platform Filter</div>
+                    <div class="config-value">${platformFilter}</div>
+                </div>
+                <div class="token-item">
+                    <div class="token-label">Redirect URL</div>
+                    <div class="config-value">${redirectUrl}</div>
+                </div>
+                ${platformUrlsHtml || '<div class="token-item"><div class="token-label">Platform OAuth URLs</div><div class="config-value">None (using simulated flow)</div></div>'}
+            `;
+        }
+        
+        function saveConfig() {
+            const platformFilter = document.getElementById('platform-filter').value;
+            const redirectUrl = document.getElementById('redirect-url').value;
+            
+            if (platformFilter) {
+                localStorage.setItem('oauth_platform_filter', platformFilter);
+            } else {
+                localStorage.removeItem('oauth_platform_filter');
+            }
+            
+            if (redirectUrl) {
+                localStorage.setItem('oauth_redirect_url', redirectUrl);
+            } else {
+                localStorage.removeItem('oauth_redirect_url');
+            }
+            
+            console.log('[Debug] Configuration saved:', { platformFilter, redirectUrl });
+            updateCurrentConfig();
+            alert('Configuration saved to localStorage!');
+        }
+        
+        function clearConfig() {
+            localStorage.removeItem('oauth_platform_filter');
+            localStorage.removeItem('oauth_redirect_url');
+            
+            document.getElementById('platform-filter').value = '';
+            document.getElementById('redirect-url').value = '';
+            
+            console.log('[Debug] Configuration cleared');
+            updateCurrentConfig();
+            alert('Configuration cleared!');
+        }
+        
+        function savePlatformUrls() {
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            const savedUrls = {};
+            
+            platforms.forEach(platform => {
+                const url = document.getElementById(`${platform}-oauth-url`).value;
+                if (url) {
+                    localStorage.setItem(`oauth_platform_url_${platform}`, url);
+                    savedUrls[platform] = url;
+                } else {
+                    localStorage.removeItem(`oauth_platform_url_${platform}`);
+                }
+            });
+            
+            console.log('[Debug] Platform URLs saved:', savedUrls);
+            updateCurrentConfig();
+            alert('Platform OAuth URLs saved!');
+        }
+        
+        function clearPlatformUrls() {
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            
+            platforms.forEach(platform => {
+                localStorage.removeItem(`oauth_platform_url_${platform}`);
+                const element = document.getElementById(`${platform}-oauth-url`);
+                if (element) {
+                    element.value = '';
+                }
+            });
+            
+            console.log('[Debug] Platform URLs cleared');
+            updateCurrentConfig();
+            alert('Platform OAuth URLs cleared!');
+        }
+        
+        function refreshTokens() {
+            displayTokens();
+            console.log('[Debug] Token list refreshed');
+        }
+        
+        function displayTokens() {
+            const tokensList = document.getElementById('tokens-list');
+            const rawTokens = document.getElementById('raw-tokens');
+            
+            const tokens = [];
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            
+            platforms.forEach(platform => {
+                const key = `oauth_token_${platform}`;
+                const data = localStorage.getItem(key);
+                if (data) {
+                    try {
+                        tokens.push({ platform, key, data: JSON.parse(data) });
+                    } catch (e) {
+                        console.error(`[Debug] Failed to parse token for ${platform}:`, e);
+                    }
+                }
+            });
+            
+            if (tokens.length === 0) {
+                tokensList.innerHTML = '<div class="empty-state">No tokens stored yet. Complete an OAuth flow to see tokens here.</div>';
+                rawTokens.innerHTML = '<div class="empty-state">No tokens to display</div>';
+                return;
+            }
+            
+            // Display formatted tokens
+            tokensList.innerHTML = tokens.map(token => {
+                const expiresAt = new Date(token.data.expires_at);
+                const isExpired = Date.now() > token.data.expires_at;
+                const statusClass = isExpired ? 'status-inactive' : 'status-active';
+                
+                return `
+                    <div class="token-box">
+                        <div class="token-platform">
+                            <span class="status-indicator ${statusClass}"></span>
+                            ${token.platform.charAt(0).toUpperCase() + token.platform.slice(1)}
+                            ${isExpired ? '(Expired)' : '(Active)'}
+                        </div>
+                        <div class="token-item">
+                            <div class="token-label">Access Token</div>
+                            <div class="token-value">${token.data.access_token}</div>
+                        </div>
+                        ${token.data.refresh_token ? `
+                            <div class="token-item">
+                                <div class="token-label">Refresh Token</div>
+                                <div class="token-value">${token.data.refresh_token}</div>
+                            </div>
+                        ` : ''}
+                        <div class="token-item">
+                            <div class="token-label">Scopes</div>
+                            <div class="token-value">${token.data.scope}</div>
+                        </div>
+                        <div class="token-item">
+                            <div class="token-label">Expires At</div>
+                            <div class="token-value">${expiresAt.toLocaleString()}</div>
+                        </div>
+                        <div class="token-item">
+                            <div class="token-label">Storage Key</div>
+                            <div class="token-value">${token.key}</div>
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteToken('${token.key}')">Delete Token</button>
+                    </div>
+                `;
+            }).join('');
+            
+            // Display raw tokens as text
+            const rawText = tokens.map(token => {
+                return `[${token.platform.toUpperCase()}]
+Access Token: ${token.data.access_token}
+${token.data.refresh_token ? `Refresh Token: ${token.data.refresh_token}\n` : ''}Scopes: ${token.data.scope}
+Expires: ${new Date(token.data.expires_at).toISOString()}
+Storage Key: ${token.key}
+`;
+            }).join('\n---\n\n');
+            
+            rawTokens.innerHTML = `<div class="token-value" style="white-space: pre-wrap;">${rawText}</div>`;
+            
+            console.log('[Debug] Displaying tokens:', tokens);
+        }
+        
+        function deleteToken(key) {
+            if (confirm(`Delete token: ${key}?`)) {
+                localStorage.removeItem(key);
+                console.log('[Debug] Deleted token:', key);
+                displayTokens();
+            }
+        }
+        
+        function clearAllTokens() {
+            if (confirm('Clear all stored OAuth tokens? This cannot be undone.')) {
+                const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+                platforms.forEach(platform => {
+                    localStorage.removeItem(`oauth_token_${platform}`);
+                });
+                console.log('[Debug] All tokens cleared');
+                displayTokens();
+                alert('All tokens cleared!');
+            }
+        }
+        
+        function testTikTok() {
+            localStorage.setItem('oauth_platform_filter', 'tiktok');
+            console.log('[Debug] Set filter to TikTok');
+            window.location.href = '/oauth.html';
+        }
+        
+        function testInstagram() {
+            localStorage.setItem('oauth_platform_filter', 'instagram');
+            console.log('[Debug] Set filter to Instagram');
+            window.location.href = '/oauth.html';
+        }
+        
+        function exportTokens() {
+            const tokens = {};
+            const platforms = ['tiktok', 'facebook', 'instagram', 'pinterest', 'linkedin'];
+            
+            platforms.forEach(platform => {
+                const key = `oauth_token_${platform}`;
+                const data = localStorage.getItem(key);
+                if (data) {
+                    tokens[platform] = JSON.parse(data);
+                }
+            });
+            
+            const json = JSON.stringify(tokens, null, 2);
+            console.log('[Debug] Exported tokens:', json);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(json).then(() => {
+                alert('Tokens exported to clipboard as JSON!');
+            }).catch(err => {
+                console.error('[Debug] Failed to copy to clipboard:', err);
+                alert('Export failed. Check console for JSON output.');
+            });
+        }
+        
+        // Initialize
+        loadConfig();
+        displayTokens();
+        
+        // Log all localStorage on load
+        console.log('[Debug] All localStorage items:');
+        Object.keys(localStorage).forEach(key => {
+            console.log(`  ${key}:`, localStorage.getItem(key));
+        });
+    </script>
+</body>
+</html>

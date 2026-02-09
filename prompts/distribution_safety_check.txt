@@ -1,0 +1,30 @@
+Review the following social media post for CRITICAL safety and legal risks only:
+
+Post content:
+---
+{{.Content}}
+---
+
+Expected language: {{.LanguageName}} ({{.Language}})
+
+Check for these issues:
+1. HARMFUL CONTENT: Dangerous advice, hate speech, harassment, or explicit content
+2. LEGAL RISK: Specific financial predictions, medical claims, or definitive legal advice
+3. UNVERIFIABLE CLAIMS: Specific personal achievements or "I did X" claims
+4. FABRICATED DATA: Made-up statistics, numbers, or facts
+5. PLACEHOLDER TEXT: Any template variables like {{.Variable}}, [INSERT], [TODO], <PLACEHOLDER>, etc.
+6. PROFANITY: Inappropriate language for professional social media
+7. WRONG LANGUAGE: Content MUST be written in {{.LanguageName}}. If the text is in a different language, mark as NOT SAFE. This is critical because image generation models sometimes hallucinate text in the wrong language.
+
+Provide your response in this exact format:
+SAFE: [YES or NO]
+CONCERNS: [If NO, list what was found. If YES, write "None"]
+CLEANED_CONTENT:
+[Post with issues removed or fixed - return original if safe]
+
+IMPORTANT:
+- Short-form social content is acceptable without sources
+- General promotional language is fine
+- Focus only on SERIOUS issues that could cause harm or liability
+- Remove ALL placeholder patterns: {{.X}}, [INSERT X], [TODO], <PLACEHOLDER>, etc.
+- Content MUST be in {{.LanguageName}} - flag any content in a different language as NOT SAFE

@@ -1,0 +1,177 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ t.archive|default:"Archive" }} - {{ archive_period }} - {{ site.name }}{% endblock %}
+
+{% block og_title %}{{ t.archive|default:"Archive" }} - {{ archive_period }} - {{ site.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="archive-header">
+        <h2>{{ t.archive|default:"Archive" }}: {{ archive_period }}</h2>
+        <p class="archive-subtitle">
+            {{ posts|length }} {{ site.content.format|lower }}{% if posts|length != 1 %}s{% endif %} {{ t.from|default:"from" }} {{ archive_period }}
+        </p>
+        <a href="{% if current_lang and current_lang != site.defaultLang %}/{{ current_lang }}/{% else %}/{% endif %}" class="back-link">
+            ← {{ t.back_to_home|default:"Back to Home" }}
+        </a>
+    </section>
+    
+    <section class="posts archive-posts">
+        {% if posts %}
+        <div class="archive-post-list">
+            {% for post in posts %}
+            <article class="archive-post-item">
+                <a href="{% if current_lang and current_lang != site.defaultLang %}/{{ current_lang }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html{% else %}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html{% endif %}" class="archive-post-link">
+                    <h4>{{ post.title }}</h4>
+                    <time datetime="{{ post.timestamp|dateformat:"iso" }}" class="archive-post-date">
+                        {{ post.timestamp|dateformat:"short" }}
+                    </time>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-posts">
+            <p>{{ t.no_content_in_archive|default:"No content in this archive period." }}</p>
+        </div>
+        {% endif %}
+    </section>
+    
+    {% if other_archives %}
+    <section class="other-archives">
+        <h3>{{ t.other_archives|default:"Other Archives" }}</h3>
+        <div class="archive-links">
+            {% for archive in other_archives %}
+            <a href="{{ archive.url }}" class="archive-link">
+                {{ archive.period }} ({{ archive.count }} {{ site.content.format|lower }}{% if archive.count != 1 %}s{% endif %})
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.archive-header {
+    text-align: center;
+    padding: 2rem 0 2rem;
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.archive-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0.75rem 0 1rem;
+}
+
+.back-link {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.back-link:hover {
+    background: var(--bg-secondary, #f8f8f8);
+    border-color: var(--text-secondary);
+    color: var(--text-color);
+}
+
+.archive-posts {
+    margin-bottom: 3rem;
+}
+
+.archive-post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.archive-post-item {
+    border-bottom: 1px solid var(--border-color, #e8e8e8);
+}
+
+.archive-post-item:last-child {
+    border-bottom: none;
+}
+
+.archive-post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.archive-post-link:hover {
+    padding-left: 1rem;
+    background: var(--bg-secondary, #f8f8f8);
+}
+
+.archive-post-link h4 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-color);
+    flex: 1;
+}
+
+.archive-post-link:hover h4 {
+    color: var(--primary-color);
+}
+
+.archive-post-date {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.other-archives {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.other-archives h3 {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.archive-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.archive-link {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.archive-link:hover {
+    background: var(--bg-secondary, #f8f8f8);
+    border-color: var(--text-secondary);
+    color: var(--text-color);
+}
+</style>
+{% endblock %}

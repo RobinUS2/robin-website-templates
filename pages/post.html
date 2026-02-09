@@ -1,0 +1,230 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ post.title }} - {{ site.name }}{% endblock %}
+
+{% block og_title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <article class="post">
+        {% if site.share_buttons_position == "top" %}
+        <div class="share-buttons share-buttons-top collapsed">
+            <p class="share-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <span>{{ t.share_this }} {{ t[site.content.format]|default:site.content.format }}:</span>
+                <span class="share-toggle">▼</span>
+            </p>
+            <div class="share-links">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+               target="_blank" rel="noopener" class="share-facebook">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}&url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html" 
+               target="_blank" rel="noopener" class="share-twitter">X / Twitter</a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+               target="_blank" rel="noopener" class="share-linkedin">LinkedIn</a>
+            <a href="https://wa.me/?text={{ post.title|urlencode }}%20{{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+               target="_blank" rel="noopener" class="share-whatsapp">WhatsApp</a>
+            <a href="https://www.reddit.com/submit?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&title={{ post.title|urlencode }}"
+               target="_blank" rel="noopener" class="share-reddit">Reddit</a>
+            <a href="https://pinterest.com/pin/create/button/?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&description={{ post.title|urlencode }}"
+               target="_blank" rel="noopener" class="share-pinterest">Pinterest</a>
+            <a href="https://t.me/share/url?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&text={{ post.title|urlencode }}"
+               target="_blank" rel="noopener" class="share-telegram">Telegram</a>
+            <a href="mailto:?subject={{ post.title|urlencode }}&body={{ post.title|urlencode }}%20-%20{{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+               class="share-email">Email</a>
+            </div>
+        </div>
+        {% endif %}
+        
+        <header class="post-header">
+            <h1>{{ post.title }}</h1>
+            <div class="post-meta">
+                <time datetime="{{ post.timestamp|dateformat:"iso" }}" class="post-date">
+                    {{ post.timestamp|dateformat:"long" }}
+                </time>
+                <span class="post-category">{{ site.content.category }}</span>
+                {% if site.metadata.experience_level %}
+                <span class="experience-level">{{ site.metadata.experience_level }}</span>
+                {% endif %}
+            </div>
+        </header>
+        
+        <div class="post-content">
+            {{ post.content_html|safe }}
+        </div>
+        
+        {% if related_articles %}
+        <aside class="related-articles">
+            <h3>{{ t.related_articles|default:"Related Articles" }}</h3>
+            <div class="related-grid">
+                {% for article in related_articles %}
+                <a href="{{ article.url }}" class="related-card">
+                    <h4>{{ article.title }}</h4>
+                    <p>{{ article.excerpt }}</p>
+                    <span class="read-more">{{ t.read_more|default:"Read more" }} →</span>
+                </a>
+                {% endfor %}
+            </div>
+        </aside>
+        {% endif %}
+        
+        <footer class="post-footer">
+            {% if post.tags %}
+            <div class="tags">
+                <span class="tags-label">{{ t.tags }}:</span>
+                {% for tag in post.tags %}
+                    <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="post-navigation">
+                <a href="/" class="back-link">← {{ t.back_to }} {{ site.name }}</a>
+            </div>
+            
+            {% if site.share_buttons_position != "top" %}
+            <div class="share-buttons collapsed">
+                <p class="share-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <span>{{ t.share_this }} {{ t[site.content.format]|default:site.content.format }}:</span>
+                    <span class="share-toggle">▼</span>
+                </p>
+                <div class="share-links">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+                   target="_blank" rel="noopener" class="share-facebook">Facebook</a>
+                <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}&url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html" 
+                   target="_blank" rel="noopener" class="share-twitter">X / Twitter</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+                   target="_blank" rel="noopener" class="share-linkedin">LinkedIn</a>
+                <a href="https://wa.me/?text={{ post.title|urlencode }}%20{{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+                   target="_blank" rel="noopener" class="share-whatsapp">WhatsApp</a>
+                <a href="https://www.reddit.com/submit?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&title={{ post.title|urlencode }}"
+                   target="_blank" rel="noopener" class="share-reddit">Reddit</a>
+                <a href="https://pinterest.com/pin/create/button/?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&description={{ post.title|urlencode }}"
+                   target="_blank" rel="noopener" class="share-pinterest">Pinterest</a>
+                <a href="https://t.me/share/url?url={{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html&text={{ post.title|urlencode }}"
+                   target="_blank" rel="noopener" class="share-telegram">Telegram</a>
+                <a href="mailto:?subject={{ post.title|urlencode }}&body={{ post.title|urlencode }}%20-%20{{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+                   class="share-email">Email</a>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if post.author %}
+            <div class="post-author">
+                <small>{{ t.by }} {{ post.author }}</small>
+            </div>
+            {% endif %}
+        </footer>
+    </article>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.related-articles {
+    margin: 3rem 0 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary, #f8f8f8);
+    border-radius: 8px;
+    border-top: 3px solid var(--primary-color);
+}
+
+.related-articles h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.related-card {
+    display: block;
+    padding: 1.25rem;
+    background: white;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.related-card h4 {
+    margin: 0 0 0.75rem;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+.related-card p {
+    margin: 0 0 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.related-card .read-more {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.related-card:hover .read-more {
+    color: var(--primary-dark);
+}
+</style>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ post.title }}",
+    "description": "{{ post.content|striptags|truncatewords:30 }}",
+    "author": {
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "url": "{{ base_url }}"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "url": "{{ base_url }}",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ base_url }}/assets/logo.png"
+        }
+    },
+    "datePublished": "{{ post.timestamp|dateformat:"iso" }}",
+    "dateModified": "{{ post.timestamp|dateformat:"iso" }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ base_url }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html"
+    },
+    "inLanguage": "{{ current_lang|default:site.defaultLang|default:"en" }}"
+}
+</script>
+{% if site.content.format == "quiz" or post.title|last == "?" %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+        "@type": "Question",
+        "name": "{{ post.title }}",
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ post.content|striptags|truncatewords:100 }}"
+        }
+    }]
+}
+</script>
+{% endif %}
+{% endblock %}

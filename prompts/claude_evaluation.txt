@@ -1,0 +1,32 @@
+Analyze the following article and determine if it would benefit from Claude AI's advanced reasoning, technical accuracy verification, and logical flow improvement capabilities.
+
+ARTICLE TITLE: {{.Title}}
+
+ARTICLE CONTENT:
+---
+{{.Content}}
+---
+
+Evaluate the article across these dimensions:
+1. **Technical Complexity** (0-100): Does it contain technical concepts, code, algorithms, or complex reasoning?
+2. **Logical Flow** (0-100): Would the logical structure and argumentation benefit from deeper analysis?
+3. **Accuracy Risk** (0-100): Does it make technical or factual claims that need verification?
+4. **Code Quality** (0-100): Does it contain code examples that could be improved or verified?
+5. **Reasoning Depth** (0-100): Would it benefit from more sophisticated logical analysis?
+6. **Visual Complexity** (0-100): Would the content benefit from complex visuals (diagrams, flowcharts, architecture diagrams, interactive SVGs, technical illustrations, process flows)?
+7. **Shallow Technical Depth** (0-100): Is the technical depth too shallow for the topic, requiring deeper insights?
+8. **Oversimplified Examples** (0-100): Are the examples too simplistic, needing more realistic or complex scenarios?
+9. **SEO Content** (0-100): Does it sound like generic SEO content that could be improved with authentic expertise?
+10. **Vague, Clichéd Advice** (0-100): Does it rely on vague or clichéd advice that lacks actionable insights?
+
+Provide your response in this EXACT format:
+CONFIDENCE: [number 0-100]
+REASON: [brief explanation of why Claude would or wouldn't help]
+
+The CONFIDENCE score represents how much Claude's capabilities would improve this content:
+- 0-30: No benefit - general content, no technical depth needed
+- 31-60: Minor benefit - some technical elements but ChatGPT handles well
+- 61-80: Moderate benefit - technical content that would improve with Claude's reasoning
+- 81-100: High benefit - complex technical/reasoning content ideal for Claude
+
+Be honest and conservative - only recommend Claude if it would meaningfully improve the content.

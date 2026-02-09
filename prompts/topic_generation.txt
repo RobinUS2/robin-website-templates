@@ -1,0 +1,80 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This content is created on behalf of {{.Domain}}.{{end}}
+
+Generate {{.Count}} unique article topic ideas for a website about {{.Description}}.
+
+Website Context:
+- Name: {{.Name}}
+- Category: {{.Category}}
+- Format: {{.Format}}
+- Target Audience: {{.TargetAudience}}
+- Content Style: {{.ContentStyle}}{{if .ExistingTitles}}
+
+Existing article titles to avoid duplicating:
+{{.ExistingTitles}}{{end}}{{if .RecentTitles}}
+
+RECENT ARTICLES (MOST IMPORTANT - DO NOT DUPLICATE THEMES OR CATEGORIES):
+{{.RecentTitles}}
+
+CRITICAL: Analyze the subjects, themes, and categories above. DO NOT generate topics about:
+- The same subject matter (e.g., if recent articles are about music, avoid more music topics)
+- Similar categories or themes (e.g., if there are multiple music questions, choose completely different domains like science, history, geography, sports, etc.)
+- Related topics in the same field
+
+You MUST ensure maximum diversity by selecting topics from DIFFERENT domains than what appears in recent articles.{{end}}{{if .PluginTopics}}
+
+Refined article ideas from community sources (Reddit, forums):
+{{.PluginTopics}}
+
+These have been refined from community questions. You may use these directly or create related topics that address similar themes.{{end}}
+
+For each topic, provide:
+1. A compelling, SEO-friendly title (60-80 characters)
+2. A brief rationale explaining why this topic is valuable
+3. Keywords for trend analysis (2-4 relevant search terms, ORDERED BY RELEVANCE with the MOST IMPORTANT/SEARCHABLE keyword FIRST - e.g., for "Welke groente zit er in erwtensoep?" use ["erwtensoep", "Nederlandse keuken", "traditioneel gerecht"] where "erwtensoep" is the primary search term)
+
+Consider:
+- Current trends and seasonality
+- Evergreen value
+- Potential for engagement
+- Monetization opportunities (affiliate links, ads)
+- Search volume and competition
+- Unique angles not commonly covered
+- MAXIMUM DIVERSITY: Spread topics across different categories (music, sports, history, science, geography, pop culture, technology, etc.)
+
+DIVERSITY RULES:
+1. NO MORE THAN ONE topic from the same category (e.g., if you suggest one music topic, the rest must be from other categories)
+2. Ensure each topic covers a DIFFERENT domain of knowledge
+3. Avoid clustering topics around similar themes
+4. Prioritize variety over depth in any single subject area
+
+FORBIDDEN TOPICS - DO NOT GENERATE:
+- Nazis, Hitler, Third Reich, Holocaust, concentration camps
+- Genocide, ethnic cleansing, mass atrocities
+- Religious persecution, antisemitism, Islamophobia
+- Racism, racial discrimination, slavery (except purely educational)
+- Terrorism, terrorist organizations
+- War crimes, controversial political figures
+- Conspiracy theories
+- Murders, killings, executions, death-related news
+- Child abuse, molestation, pedophilia, crimes against children
+- Sexual assault, rape, sexual violence
+- Prison, incarceration, criminal cases
+- Suicides, self-harm, overdoses
+- Mass shootings, gun violence, school shootings
+- Domestic violence, abuse, human trafficking
+- Celebrity deaths, scandals, court cases
+- Any topic that could be seen as promoting hate or discrimination
+
+Format your response as a numbered list:
+1. Title: [Title Here]
+   Keywords: [keyword1, keyword2, keyword3]
+   Rationale: [Why this topic is valuable]
+
+2. Title: [Title Here]
+   Keywords: [keyword1, keyword2, keyword3]c
+   Rationale: [Why this topic is valuable]
+
+And so on...
+
+IMPORTANT: Generate EXACTLY {{.Count}} topic ideas - no more, no less. Stop after {{.Count}} topics.

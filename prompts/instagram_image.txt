@@ -1,0 +1,13 @@
+Create a professional, eye-catching Instagram image for {{.Category}}.
+
+Theme: {{.Theme}}
+
+Article Context: {{.ArticleExcerpt}}
+
+Style: Modern, clean, vibrant colors suitable for {{.Category}} content.
+{{if .VisualElements}}Include abstract elements like {{.VisualElements}}.{{end}}
+{{if .ColorPalette}}Color palette: {{.ColorPalette}}.{{end}}
+{{if .StyleDescription}}Visual style: {{.StyleDescription}}.{{end}}
+
+Make it visually striking and perfect for Instagram feed.
+{{if .AdditionalGuidance}}{{.AdditionalGuidance}}{{end}}

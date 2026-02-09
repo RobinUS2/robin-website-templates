@@ -1,0 +1,19 @@
+For the following article, suggest up to 10 relevant, high-quality external links that would genuinely enhance a {{.AudienceLevel}} reader's understanding.
+
+{{.FilterInstructions}}
+
+Article title: {{.Title}}
+
+Article content:
+---
+{{.Content}}
+---
+
+Provide ONLY the URLs, one per line. Use deep links to specific valuable content, NOT homepage URLs. For example:
+- GOOD: https://en.wikipedia.org/wiki/Sidechain_compression (in-depth technique)
+- GOOD: https://www.youtube.com/watch?v=actual_video_id (advanced tutorial)
+- GOOD: https://support.apple.com/guide/logicpro/advanced-routing-techniques
+- BAD: https://www.ableton.com/ (obvious brand, beginners already know)
+- BAD: https://en.wikipedia.org/wiki/Butter (too basic for cooking site)
+
+Provide only valid, accessible URLs that exist and add genuine value beyond basic knowledge. If you cannot think of 10 good links that pass the filtering rules, provide fewer.

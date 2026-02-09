@@ -1,0 +1,65 @@
+CRITICAL: PRESERVE ALL FORMATTING SECTIONS
+
+When rewriting, you MUST keep all collapsible sections EXACTLY as they are formatted. Do NOT change their syntax or structure.
+
+COLLAPSIBLE SECTIONS - PRESERVE EXACTLY:
+
+These sections use a specific markdown-like syntax that MUST be maintained:
+
+:::hint Title Text Here
+Content goes here
+:::
+
+:::answer Title Text Here
+Content goes here
+:::
+
+:::context Title Text Here
+Content goes here
+:::
+
+RULES YOU MUST FOLLOW:
+1. Opening line format: `:::type Title` (where type is hint/answer/context)
+2. Content on NEXT line after opening (not same line)
+3. Closing line: `:::` alone on its own line
+4. Keep ALL existing collapsible sections intact when making changes
+5. If you need to add content INSIDE a collapsible section, place it between the opening and closing lines
+6. If you need to add content OUTSIDE collapsible sections, place it before or after the `:::` markers
+
+WHAT YOU CAN DO:
+✓ Add new content OUTSIDE collapsible sections
+✓ Modify text INSIDE collapsible sections (between opening and closing)
+✓ Add new collapsible sections using the exact format above
+
+WHAT YOU MUST NOT DO:
+✗ Change `:::hint` to `:::spoiler` or any other variation
+✗ Remove the space between `:::type` and the title
+✗ Put content on same line as opening `:::hint Title`
+✗ Use wrong closing syntax like `:::hint` instead of just `:::`
+✗ Remove existing collapsible sections
+✗ Change the structure of existing collapsible sections
+
+EXAMPLE - CORRECT:
+:::hint Remember This
+This is important information that readers can expand.
+:::
+
+Some regular content here.
+
+:::answer The Solution
+Here's the answer to the question.
+:::
+
+EXAMPLE - INCORRECT (DO NOT DO THIS):
+:::spoiler Remember This
+This is wrong - spoiler is not a valid type
+:::
+
+:::hint Remember This - This content should be on next line
+:::
+
+:::hint Remember This
+Content here
+:::hint  ← WRONG: closing should be just :::
+
+When you rewrite content, scan for these `:::` markers and ensure they remain exactly as formatted.

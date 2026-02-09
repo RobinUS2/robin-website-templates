@@ -1,0 +1,34 @@
+Create a vertical, Pinterest-optimized image that stops scrollers and inspires action for {{.Category}}.
+
+Theme: {{.Theme}}
+
+Article Context: {{.ArticleExcerpt}}
+
+Pinterest-Specific Requirements:
+- Aspect ratio: 2:3 vertical (1000x1500px ideal)
+- Bold, clear text overlay with the main question or hook
+- Eye-catching design that works at thumbnail size
+- Educational and inspirational tone
+- Clear visual hierarchy with the most important text at top
+
+Style: Bright, engaging, pin-worthy design optimized for saving and sharing.
+{{if .VisualElements}}Visual elements: {{.VisualElements}}.{{end}}
+{{if .ColorPalette}}Color palette: {{.ColorPalette}}.{{end}}
+{{if .StyleDescription}}Visual style: {{.StyleDescription}}.{{end}}
+
+Pinterest Best Practices:
+- Large, readable text (even on mobile)
+- Compelling value proposition visible immediately
+- Professional yet approachable aesthetic
+- Designed to trigger "save for later" response
+- Educational/informative visual content
+
+HUMAN DESIGN AESTHETIC:
+MEDIUM: Use flat graphic design, watercolor illustration, vintage magazine layout, or line drawing style.
+STYLE REFERENCE: Reference real design movements like Bauhaus posters, 1970s magazine layouts, Swiss typography, or Art Deco aesthetics.
+CONSTRAINTS: Limited color palette (3-4 colors), simple shapes, clean composition, restrained design, minimal elements, matte finish, single focal point.
+EXCLUSIONS: No glowing effects, no neon colors, no 3D renders, no dramatic lighting, no lens flares, no futuristic aesthetics, no perfect symmetry, no stock photo people, no gradient meshes.
+IMPERFECTIONS: Slightly off-center, hand-drawn quality, natural lighting, visible texture, paper grain, uneven spacing, subtle asymmetry.
+CONTEXT: Should look like an educational infographic, museum poster, book cover, or product packaging created by a professional human designer.
+{{if .AdditionalGuidance}}{{.AdditionalGuidance}}{{end}}
+

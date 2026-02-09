@@ -1,0 +1,29 @@
+The following article has been flagged as sounding too AI-generated. Please rewrite it to sound more human and authentic while maintaining the same information and structure.
+
+FEEDBACK ON WHAT TO IMPROVE:
+{{.Feedback}}
+
+ORIGINAL ARTICLE:
+---
+{{.Content}}
+---
+{{.LinksSection}}
+REQUIREMENTS FOR REWRITE:
+1. Maintain all factual information and key points
+2. Keep the same general structure and sections
+3. Make the language more natural and conversational
+4. Add personality and authentic voice
+5. Use varied sentence structures and lengths
+6. Include occasional contractions where natural
+7. Add specific opinions or personal insights where appropriate
+8. Remove overly formal or robotic phrasing
+9. Make it sound like it was written by a real expert sharing knowledge, not an AI
+10. Keep the same title or make it better
+11. Do NOT use horizontal rules (---) as section separators in the content
+{{.LinkInstructions}}
+
+{{.SafetyGuidelines}}
+
+{{.PreserveFormatting}}
+
+Write the improved version below:

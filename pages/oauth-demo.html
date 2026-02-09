@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Authorization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .platform-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .platform-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .platform-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .platform-info {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .scopes {
+            margin: 15px 0;
+        }
+        
+        .scope-item {
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 5px 0;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .scope-item::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .connect-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .connect-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .modal-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .permission-list {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .permission-list h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .permission-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .permission-item:last-child {
+            border-bottom: none;
+        }
+        
+        .permission-item::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-authorize {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .token-display {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .info-banner {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .info-banner h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .info-banner p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Social Media Authorization</h1>
+            <p>Connect and manage your social media accounts</p>
+        </header>
+        
+        <div class="platforms" id="platformsGrid"></div>
+    </div>
+    
+    <div class="modal" id="authModal">
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+    
+    <script>
+        // Platform configuration injected from configs/demo/oauth_platforms.json
+        const platformsConfig = "PLATFORMS_CONFIG_INJECT";
+        
+        // Map platform config to UI format
+        const iconMap = {
+            'tiktok': '🎵',
+            'facebook': '📘',
+            'instagram': '📷',
+            'pinterest': '📌',
+            'linkedin': '💼'
+        };
+        
+        const descriptionMap = {
+            'tiktok': 'Post videos to TikTok',
+            'facebook': 'Manage Facebook Pages',
+            'instagram': 'Post photos and videos',
+            'pinterest': 'Create and manage pins',
+            'linkedin': 'Share professional content'
+        };
+        
+        const scopeDescriptions = {
+            'video.upload': 'Upload and publish videos to your account',
+            'user.info.basic': 'Access basic profile information',
+            'pages_show_list': 'View your Facebook Pages',
+            'pages_read_engagement': 'Read engagement data from your Pages',
+            'pages_manage_posts': 'Create, edit, and delete posts on your Pages',
+            'instagram_basic': 'Access basic profile information',
+            'instagram_content_publish': 'Publish photos and videos to your account',
+            'boards:read': 'View your boards',
+            'pins:read': 'View your pins',
+            'pins:write': 'Create and manage pins on your boards',
+            'w_member_social': 'Share content on your behalf',
+            'r_basicprofile': 'Access your basic profile information'
+        };
+        
+        const platforms = platformsConfig.map(config => ({
+            name: config.display_name,
+            clientId: config.client_id,
+            color: config.color,
+            icon: iconMap[config.name] || '🔗',
+            scopes: config.scopes.map(scope => ({
+                key: scope,
+                description: scopeDescriptions[scope] || scope
+            })),
+            description: descriptionMap[config.name] || `Connect to ${config.display_name}`
+        }));
+        
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        function getFilteredPlatforms() {
+            // First check localStorage for platform filter
+            const storedFilter = localStorage.getItem('oauth_platform_filter');
+            console.log('[OAuth] Stored platform filter:', storedFilter);
+            
+            // Then check URL query param
+            const platformFilter = getQueryParam('platform') || storedFilter;
+            console.log('[OAuth] Active platform filter:', platformFilter);
+            
+            if (platformFilter) {
+                const filtered = platforms.filter(p => p.name.toLowerCase() === platformFilter.toLowerCase());
+                return filtered.length > 0 ? filtered : platforms;
+            }
+            return platforms;
+        }
+        
+        function renderPlatforms() {
+            // Log localStorage configuration on page load
+            console.log('[OAuth] Configuration:');
+            console.log('  - Platform filter:', localStorage.getItem('oauth_platform_filter'));
+            console.log('  - Redirect URL:', localStorage.getItem('oauth_redirect_url') || 'default: /oauth-callback.html');
+            console.log('  - Stored platform:', localStorage.getItem('oauth_platform'));
+            
+            const grid = document.getElementById('platformsGrid');
+            const filteredPlatforms = getFilteredPlatforms();
+            console.log('[OAuth] Showing platforms:', filteredPlatforms.map(p => p.name).join(', '));
+            
+            grid.innerHTML = filteredPlatforms.map(platform => `
+                <div class="platform-card" onclick="showPlatformDetails('${platform.name}')">
+                    <div class="platform-header">
+                        <div class="platform-icon" style="background: ${platform.color}20; color: ${platform.color};">
+                            ${platform.icon}
+                        </div>
+                        <div class="platform-name">${platform.name}</div>
+                    </div>
+                    <div class="platform-info">${platform.description}</div>
+                    <button class="connect-btn" style="background: ${platform.color};">
+                        Select Platform
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function showPlatformDetails(platformName) {
+            const platform = platforms.find(p => p.name === platformName);
+            const modal = document.getElementById('authModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-icon" style="background: ${platform.color}20; color: ${platform.color};">
+                        ${platform.icon}
+                    </div>
+                    <h2 class="modal-title">${platform.name}</h2>
+                    <p class="modal-subtitle">Platform Details</p>
+                </div>
+                
+                <p style="margin-bottom: 20px; color: #666;">
+                    ${platform.description}
+                </p>
+                
+                <div class="permission-list">
+                    <h3>This integration will allow:</h3>
+                    ${platform.scopes.map(scope => 
+                        `<div class="permission-item" style="padding: 12px 0;">
+                            <strong>${scope.description}</strong>
+                        </div>`
+                    ).join('')}
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="closeModal()">
+                        Cancel
+                    </button>
+                    <button class="modal-btn btn-authorize" style="background: ${platform.color};" onclick="startAuth('${platform.name}')">
+                        Continue to Authorization
+                    </button>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+        
+        function startAuth(platformName) {
+            const platform = platforms.find(p => p.name === platformName);
+            showAuthModal(platform);
+        }
+        
+        function showAuthModal(platform) {
+            const modal = document.getElementById('authModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-icon" style="background: ${platform.color}20; color: ${platform.color};">
+                        ${platform.icon}
+                    </div>
+                    <h2 class="modal-title">${platform.name}</h2>
+                    <p class="modal-subtitle">Authorization Request</p>
+                </div>
+                
+                <p style="margin-bottom: 20px; color: #666;">
+                    This application is requesting permission to access your ${platform.name} account.
+                </p>
+                
+                <div class="permission-list">
+                    <h3>Permissions requested:</h3>
+                    ${platform.scopes.map(scope => 
+                        `<div class="permission-item">${scope.description}</div>`
+                    ).join('')}
+                </div>
+                
+                <p style="color: #999; font-size: 0.85rem; text-align: center; margin: 15px 0;">
+                    By authorizing, you allow this application to perform these actions on your behalf.
+                </p>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="closeModal()">
+                        Cancel
+                    </button>
+                    <button class="modal-btn btn-authorize" style="background: ${platform.color};" onclick="authorize('${platform.name}')">
+                        Authorize
+                    </button>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.remove('active');
+        }
+        
+        function authorize(platformName) {
+            const platform = platforms.find(p => p.name === platformName);
+            
+            // Check if there's a custom platform OAuth URL configured
+            const platformOAuthUrl = localStorage.getItem(`oauth_platform_url_${platformName.toLowerCase()}`);
+            
+            if (platformOAuthUrl) {
+                // Redirect to real platform OAuth
+                console.log('[OAuth] Using real platform OAuth URL:', platformOAuthUrl);
+                console.log('[OAuth] Platform:', platformName);
+                console.log('[OAuth] Client ID:', platform.clientId);
+                console.log('[OAuth] Scopes:', platform.scopes.map(s => s.key).join(' '));
+                
+                const redirectUri = localStorage.getItem('oauth_redirect_url') || `${window.location.origin}/oauth-callback.html`;
+                
+                // TikTok uses comma-separated scopes, others use space-separated
+                const scopeSeparator = platformName === 'TikTok' ? ',' : ' ';
+                const scopes = platform.scopes.map(s => s.key).join(scopeSeparator);
+                
+                // Generate CSRF state token
+                const csrfState = Math.random().toString(36).substring(2);
+                
+                // Store platform name and CSRF state so callback knows which platform this is for
+                localStorage.setItem('oauth_pending_platform', platformName);
+                localStorage.setItem('oauth_csrf_state', csrfState);
+                
+                // Build OAuth URL with parameters
+                const oauthUrl = new URL(platformOAuthUrl);
+                
+                // TikTok uses 'client_key', others use 'client_id'
+                const clientParam = platformName === 'TikTok' ? 'client_key' : 'client_id';
+                oauthUrl.searchParams.set(clientParam, platform.clientId);
+                oauthUrl.searchParams.set('redirect_uri', redirectUri);
+                oauthUrl.searchParams.set('scope', scopes);
+                oauthUrl.searchParams.set('response_type', 'code');
+                oauthUrl.searchParams.set('state', csrfState);
+                
+                const authUrlString = oauthUrl.toString();
+                console.log('[OAuth] Redirecting to platform:', authUrlString);
+                
+                // Store auth URL in localStorage for debug purposes
+                localStorage.setItem('oauth_last_auth_url', authUrlString);
+                localStorage.setItem('oauth_last_auth_platform', platformName);
+                localStorage.setItem('oauth_last_auth_timestamp', new Date().toISOString());
+                
+                window.location.href = authUrlString;
+                return;
+            }
+            
+            // Otherwise use simulated flow
+            console.log('[OAuth] Using simulated OAuth flow');
+            
+            // Get redirect URL from localStorage or use default
+            const redirectUrl = localStorage.getItem('oauth_redirect_url') || `${window.location.origin}/oauth-callback.html`;
+            console.log('[OAuth] Redirect URL:', redirectUrl);
+            console.log('[OAuth] Platform:', platformName);
+            console.log('[OAuth] Client ID:', platform.clientId);
+            console.log('[OAuth] Scopes:', platform.scopes.map(s => s.key).join(' '));
+            
+            // Generate tokens
+            const tokens = generateTokens(platform);
+            console.log('[OAuth] Generated tokens:', tokens);
+            
+            // Store platform info for callback page
+            localStorage.setItem('oauth_platform', platformName);
+            localStorage.setItem('oauth_tokens', JSON.stringify(tokens));
+            
+            // Redirect to callback page with tokens
+            const callbackUrl = new URL(redirectUrl);
+            callbackUrl.searchParams.set('platform', platformName);
+            callbackUrl.searchParams.set('access_token', tokens.access_token);
+            if (tokens.refresh_token) {
+                callbackUrl.searchParams.set('refresh_token', tokens.refresh_token);
+            }
+            callbackUrl.searchParams.set('expires_in', tokens.expires_in);
+            callbackUrl.searchParams.set('scope', tokens.scope);
+            
+            console.log('[OAuth] Redirecting to:', callbackUrl.toString());
+            window.location.href = callbackUrl.toString();
+        }
+        
+        function generateTokens(platform) {
+            const timestamp = Date.now();
+            const random = Math.random().toString(36).substring(2, 15);
+            const random2 = Math.random().toString(36).substring(2, 10);
+            
+            return {
+                access_token: `${platform.name.toLowerCase()}_${timestamp}_${random}_${random2}`,
+                refresh_token: platform.name !== 'Facebook' ? `${platform.name.toLowerCase()}_refresh_${timestamp}_${random}` : null,
+                expires_in: 86400,
+                token_type: 'Bearer',
+                scope: platform.scopes.map(s => s.key).join(' ')
+            };
+        }
+        
+        // Initialize
+        renderPlatforms();
+        
+        // Close modal on outside click
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target.id === 'authModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

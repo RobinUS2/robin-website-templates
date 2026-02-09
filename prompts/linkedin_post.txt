@@ -1,0 +1,43 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This post is created on behalf of {{.Domain}}.{{end}}
+
+Generate a professional LinkedIn post for this content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write in {{.Language}} language
+2. Aim for 150-300 characters for optimal engagement (LinkedIn allows up to 3,000)
+3. Professional yet personable tone
+4. Include 1-2 professional emojis sparingly (like 💡 📊 🎯 ✨)
+5. Structure for readability:
+   - Hook: Start with an engaging question or statement
+   - Value: Briefly explain what readers will learn
+   - Call-to-action: Encourage engagement (comment, share, read more)
+6. Add 3-5 relevant professional hashtags
+   - Use industry-standard hashtags
+   - Include location/language-specific tags if relevant
+   - Return hashtags WITHOUT # prefix (we'll add them)
+7. Keep the tone {{.Tone}} but professional
+8. Focus on value and insights rather than promotion
+
+LinkedIn best practices:
+- Use line breaks to improve readability
+- First 2 lines are critical (shown before "see more")
+- Ask questions to drive comments
+- Share insights or lessons learned
+- Tag the article link at the end: "Read more: [URL]"
+
+Format your response as JSON:
+{
+  "text": "the LinkedIn post text with emojis, line breaks, and URL at the end",
+  "hashtags": ["hashtag1", "hashtag2", "hashtag3", "hashtag4"]
+}
+
+IMPORTANT: Return ONLY valid JSON, no additional text.

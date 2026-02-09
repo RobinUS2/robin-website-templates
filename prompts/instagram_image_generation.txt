@@ -1,0 +1,56 @@
+{{if .Domain}}WORKING CONTEXT: This image is created on behalf of {{.Domain}}.{{end}}
+
+MANDATORY BRAND STYLING (Must be followed exactly):
+{{if .StyleDescription}}Style: {{.StyleDescription}}{{end}}
+{{if .ColorPalette}}Color palette: {{.ColorPalette}}{{end}}
+{{if .VisualElements}}Include elements like: {{.VisualElements}}{{end}}
+{{if .AdditionalGuidance}}{{.AdditionalGuidance}}{{end}}
+
+Subject matter to incorporate:
+{{.VisualConcept}}
+
+VISUAL STYLING HIERARCHY (when instructions conflict):
+1. BRAND STYLING above (colors, style, elements) always takes precedence
+2. Visual elements (composition, aesthetic, layout) from subject matter may be incorporated
+3. Any content placement or structural suggestions from subject matter should be ignored
+4. Focus on translating the visual concept into the brand's established aesthetic
+
+Create a professional, eye-catching image perfect for Instagram.
+IMPORTANT: The image MUST include the specified text prominently displayed. Use bold, readable typography that stands out against the background.
+
+CRITICAL BACKGROUND AND CONTRAST REQUIREMENTS:
+- ALWAYS use a colored, textured, or gradient background - NEVER plain white
+- Background should be rich and visually interesting (deep colors, textures, patterns, or photography)
+- Ensure HIGH CONTRAST between text and background for maximum readability
+- If background is dark, use white or bright text. If background is light/medium, use dark or bold colored text
+- Add a subtle text shadow, outline, or semi-transparent backing behind text if needed for legibility
+- Test mentally: could you read this text from 3 feet away on a phone screen?
+
+CRITICAL TEXT PLACEMENT FOR INSTAGRAM:
+- Instagram displays posts in both square (1:1) and portrait formats
+- Place ALL text in the CENTER of the image within the safe zone
+- The safe zone is the middle 70% of the image (avoid top 15% and bottom 15%)
+- Center the text both horizontally and vertically
+- Keep text blocks compact and centered to ensure visibility in square crop
+- Use multiple lines if needed, but keep all lines within the central safe zone
+- Avoid placing any important text near edges, top, or bottom areas
+
+Make the text large enough to read on mobile devices. Use complementary colors for maximum readability.
+{{if .DomainName}}Include the domain name "{{.DomainName}}" subtly in the bottom center (small, elegant font that doesn't distract from the main text).{{end}}
+Make it visually striking with strong composition and vibrant colors.
+
+HUMAN DESIGN AESTHETIC:
+MEDIUM: Use editorial photography, flat graphic design, screen print poster, or collage art style.
+STYLE REFERENCE: Reference real design movements like Bauhaus posters, 1970s magazine layouts, Scandinavian minimalism, or Mid-century modern aesthetics.
+CONSTRAINTS: Limited color palette (3-4 colors), simple geometric shapes, clean composition, restrained design, matte finish, flat 2D design.
+EXCLUSIONS: No glowing effects, no neon colors, no 3D renders, no dramatic lighting, no lens flares, no perfect symmetry, no chrome finishes, no gradient meshes, no holographic effects.
+IMPERFECTIONS: Slightly off-center composition, hand-drawn quality, natural lighting, visible texture/paper grain, subtle asymmetry, analog feel.
+CONTEXT: Should look like a magazine advertisement, concert poster, album artwork, or gallery exhibition print created by a professional human designer.
+
+CRITICAL COPYRIGHT REQUIREMENTS:
+- DO NOT include any recognizable celebrities, public figures, or real people
+- DO NOT recreate specific album covers, movie posters, or copyrighted artwork
+- DO NOT use brand logos or trademarked imagery
+- Use ONLY generic, abstract, symbolic, or era-appropriate styling
+- Focus on colors, shapes, patterns, and conceptual representations
+- All imagery must be original and copyright-safe

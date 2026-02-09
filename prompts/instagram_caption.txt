@@ -1,0 +1,34 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This post is created on behalf of {{.Domain}}.{{end}}
+
+Generate an engaging Instagram caption for this content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write in {{.Language}} language
+2. Keep the caption text under 400 characters (will be combined with hashtags, Instagram max is 2,200 total)
+3. Start with an attention-grabbing hook or question
+4. Include 1-3 relevant emojis that match the content theme (but don't overdo it)
+5. Add "🔗 Link in bio" or similar call-to-action in {{.Language}}
+6. Generate 8-15 highly relevant hashtags for maximum reach (Instagram allows max 30):
+   - Mix popular hashtags (100k-1M posts) with niche ones (10k-100k posts)
+   - Include location/language-specific hashtags if relevant (e.g., #pubquiz for Dutch quiz content)
+   - Make hashtags discoverable and relevant to the content
+   - Return hashtags WITHOUT # prefix (we'll add them)
+7. Keep the tone {{.Tone}}
+8. Make it shareable and engaging
+
+Format your response as JSON:
+{
+  "caption": "the caption text with emojis",
+  "hashtags": ["hashtag1", "hashtag2", ...]
+}
+
+IMPORTANT: Return ONLY valid JSON, no additional text.

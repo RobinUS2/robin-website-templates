@@ -1,0 +1,75 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This image is created on behalf of {{.Domain}}.{{end}}
+
+You are an expert at creating engaging Instagram visuals for {{.Category}} content.
+
+Analyze this article and determine the best visual concept for an Instagram post image:
+
+Title: {{.Title}}
+
+Content:
+{{.Content}}
+
+{{if .Language}}LANGUAGE REQUIREMENT: The TEXT must be in {{.Language}}. Do NOT use English - use {{.Language}} for the text on the image.
+
+{{end}}Your task:
+1. Identify the most attention-grabbing aspect of this article that would work as TEXT on an image
+2. For quiz/question content: USE THE QUESTION ITSELF as the text (it's already engaging!)
+3. For other content: Extract a short, catchy phrase - could be the title, a key takeaway, or powerful statement
+4. Keep it concise (prefer the full question for quizzes, or 3-8 words for other content){{if .Language}} - IN {{.Language}}{{end}}
+5. Then describe ONLY the subject matter/imagery for the visual backdrop
+
+CRITICAL FOR QUIZ/QUESTION CONTENT - DO NOT REVEAL THE ANSWER:
+When creating visuals for quiz questions, the image must NOT give away or hint at the answer:
+- NEVER show the specific answer (e.g., if the answer is "Vatican City", don't show Vatican imagery)
+- NEVER use visuals that would eliminate answer options (e.g., if asking "which country", don't show that country's landmarks)
+- NEVER mention any of the answer options in the visual description (e.g., if options are A. Jupiter, B. Saturn, C. Uranus, D. Neptune - don't show or name ANY of these)
+- NEVER include the correct answer's imagery even in "abstract" form (e.g., "abstract Saturn" still reveals Saturn)
+- DO use ONLY abstract, thematic visuals related to the BROAD CATEGORY (e.g., "space/astronomy" not specific planets)
+- DO use question marks, curiosity-evoking imagery, and brand elements
+- DO use generic category imagery: starfields, nebulae, telescopes, scientists, books, globes, etc.
+- The goal is to INTRIGUE viewers to click through and discover the answer, not reveal it visually
+
+IMPORTANT: For quiz content, if you find yourself wanting to include ANY of the answer options in the visual, STOP and use a completely generic category visual instead. Better to be too abstract than to give hints.
+
+CRITICAL: DESCRIBE ONLY SUBJECT MATTER, NOT STYLE
+The visual description should focus ONLY on:
+- What objects, symbols, or subjects should appear
+- The scene or setting
+- Relevant thematic imagery
+
+DO NOT include in your visual description:
+- Color choices (e.g., "black and white", "golden tones", "navy blue")
+- Style descriptions (e.g., "vintage style", "modern aesthetic", "minimalist")
+- Lighting mood (e.g., "warm lighting", "dramatic shadows")
+- Design treatments (e.g., "retro feel", "neon glow", "clean design")
+
+These style elements will be provided separately from the brand guidelines.
+
+CRITICAL COPYRIGHT GUIDELINES:
+- DO NOT reference specific celebrities, public figures, or real people by name
+- DO NOT reference specific album covers, movie posters, or copyrighted artwork
+- DO NOT use brand names or trademarked logos
+- Use GENERIC descriptions: instead of "Elvis Presley photo", use "1950s rock musician silhouette"
+- Use ABSTRACT representations: geometric patterns, symbolic imagery
+- Focus on CONCEPTS and IMAGERY rather than specific identifiable works
+
+Respond in this format:
+TEXT: [the catchy text to display]
+VISUAL: [brief description of the subject matter/imagery ONLY - no color or style specifications]
+
+Example good responses:
+- TEXT: Wat is de hoofdstad van Frankrijk?
+VISUAL: Abstract continental outline, compass rose, globe with question marks (NOT Paris landmarks or Eiffel Tower since that's the answer)
+- TEXT: Welke planeet heeft de meeste manen?
+VISUAL: Starfield with distant galaxies, telescope silhouette, question marks floating in space (NOT any specific planet since all options are planets)
+- TEXT: Unlock Your Sound Design Potential
+VISUAL: Sound waves morphing into geometric patterns, audio waveforms, equalizer bars
+- TEXT: Master the Art of Synthesis
+VISUAL: Synthesizer with floating musical notes, energy waves emanating from the keys
+- TEXT: Hoeveel benen heeft een spin?
+VISUAL: Web patterns with symmetrical design elements, nature silhouettes (NOT showing a spider or eight legs)
+- TEXT: The Birth of Rock and Roll
+VISUAL: Retro microphone silhouette, musical notes, spotlight rays, vinyl record
+
+Your response:

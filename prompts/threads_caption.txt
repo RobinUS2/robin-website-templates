@@ -1,0 +1,50 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This post is created on behalf of {{.Domain}}.{{end}}
+
+Generate an engaging Threads post for this quiz content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Article URL: {{.ArticleURL}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write in {{.Language}} language
+2. Keep the caption under 400 characters (leave room for link)
+3. Start with an attention-grabbing question or hook
+4. Include 1-2 relevant emojis (Threads is casual, don't overdo it)
+5. Include the article link at the end of the caption: {{.ArticleURL}}
+   - Example in English: "Read more: {{.ArticleURL}}"
+   - Example in Dutch: "Lees meer: {{.ArticleURL}}"
+6. Generate exactly 1 topic tag (the most relevant one) - Threads shows this prominently
+7. Keep the tone {{.Tone}} and conversational
+8. For quiz content: tease the question without giving the answer
+9. End with an engaging call-to-action like "What's your guess?" before the link
+
+Threads Style Tips:
+- More text-focused than Instagram
+- Conversational and authentic voice
+- For QUIZ content: We'll create a POLL with the answer options - do NOT include the options in the caption
+- Less polished, more genuine
+
+QUIZ/POLL DETECTION:
+- If the content contains answer options (A, B, C, D), this is a QUIZ post
+- For quiz posts, extract the answer options for the poll
+- Keep poll options SHORT (max 25 characters each)
+- If an option is too long, abbreviate it smartly
+
+Format your response as JSON:
+{
+  "caption": "the caption text WITHOUT the URL or answer options",
+  "hashtags": ["topictag"],
+  "poll_options": ["Option A text", "Option B text", "Option C text", "Option D text"]
+}
+
+NOTE: Only include "poll_options" if the content has quiz answer choices (A, B, C, D format).
+For non-quiz content, omit the poll_options field entirely.
+
+IMPORTANT: Return ONLY valid JSON, no additional text.

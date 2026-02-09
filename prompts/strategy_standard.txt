@@ -1,0 +1,44 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This content is created on behalf of {{.Domain}}. References to this domain are authorized.{{end}}
+
+Write a comprehensive {{.Format}} about: {{.Topic}}
+
+Topic Context: {{.TopicRationale}}
+
+CONTENT REQUIREMENTS:
+- Create engaging, well-researched content
+- Include practical examples and actionable insights
+- Target audience: {{.TargetAudience}}
+- Content category: {{.Category}}
+- Maintain a professional yet accessible tone
+- Optimize for SEO with relevant keywords naturally incorporated
+- Length: 800-1200 words
+
+WRITING APPROACH:
+- Write as a subject matter expert sharing valuable knowledge
+- Use a conversational but authoritative tone
+- Include real-world examples and practical applications
+- Structure content for easy scanning (clear sections, short paragraphs)
+- Add personality and occasional humor where appropriate
+
+DATA INTEGRITY:
+- NEVER fabricate statistics, numbers, dates, or specific facts
+- If data might be outdated, explicitly state "as of [year]" or warn it may have changed
+- Prefer general statements over uncertain specific numbers
+- If unsure about a fact, use "reportedly" or omit it
+
+STYLE:
+- Tone: {{.Tone}}
+- Site: {{.SiteName}}
+- Vary sentence lengths and paragraph sizes
+- Include occasional first-person observations
+- Avoid AI-like patterns (no "In today's world...", no "When it comes to...")
+
+{{if .FeedbackInstructions}}
+IMPORTANT - FEEDBACK-BASED IMPROVEMENTS:
+Based on previous content feedback, follow these specific instructions:
+
+{{.FeedbackInstructions}}
+{{end}}
+
+{{.SafetyGuidelines}}

@@ -1,0 +1,76 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ t.nav_about }} - {{ site.name }}{% endblock %}
+
+{% block og_title %}{{ t.nav_about }} - {{ site.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <article class="about-page">
+        <header class="about-header">
+            <h1>{{ t.nav_about }} {{ site.name }}</h1>
+            <p class="about-subtitle">{{ about.subtitle }}</p>
+        </header>
+        
+        <div class="about-content">
+            {{ about.content_html|safe }}
+        </div>
+        
+        {% if about.team %}
+        <section class="team-section">
+            <h2>{{ t.meet_the_team }}</h2>
+            <div class="team-grid">
+                {% for member in about.team %}
+                <div class="team-member">
+                    <h3>{{ member.name }}</h3>
+                    <p class="role">{{ member.role }}</p>
+                    <p class="bio">{{ member.bio }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        
+        {% if site.social.instagram or site.social.twitter or site.social.youtube or site.social.tiktok or site.social.facebook %}
+        <section class="contact-section">
+            <h2>{{ t.get_in_touch }}</h2>
+            <p>{{ t.follow_us_on }}</p>
+            <div class="social-links">
+                {% if site.social.instagram %}
+                    <a href="https://instagram.com/{{ site.social.instagram }}" target="_blank" rel="noopener" class="social-link instagram">Instagram</a>
+                {% endif %}
+                {% if site.social.twitter %}
+                    <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener" class="social-link twitter">Twitter</a>
+                {% endif %}
+                {% if site.social.youtube %}
+                    <a href="https://youtube.com/{{ site.social.youtube }}" target="_blank" rel="noopener" class="social-link youtube">YouTube</a>
+                {% endif %}
+                {% if site.social.tiktok %}
+                    <a href="https://tiktok.com/{{ site.social.tiktok }}" target="_blank" rel="noopener" class="social-link tiktok">TikTok</a>
+                {% endif %}
+                {% if site.social.facebook %}
+                    <a href="https://facebook.com/{{ site.social.facebook }}" target="_blank" rel="noopener" class="social-link facebook">Facebook</a>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+    </article>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "{{ t.nav_about }} {{ site.name }}",
+    "description": "{{ about.subtitle }}",
+    "url": "{{ base_url }}/about.html",
+    "mainEntity": {
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "description": "{{ site.description }}"
+    }
+}
+</script>
+{% endblock %}

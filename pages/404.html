@@ -1,0 +1,100 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}404 - {{ t.page_not_found|default:"Page Not Found" }} - {{ site.name }}{% endblock %}
+
+{% block og_title %}404 - {{ t.page_not_found|default:"Page Not Found" }} - {{ site.name }}{% endblock %}
+
+{% block extra_head %}
+<meta http-equiv="refresh" content="5;url={{ base_url }}{% if current_lang and current_lang != site.defaultLang %}/{{ current_lang }}/{% else %}/{% endif %}">
+<style>
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin: 1rem 0 2rem;
+    color: var(--text-color);
+}
+
+.error-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.redirect-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--text-secondary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.home-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.home-link:hover {
+    background: var(--primary-dark);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-message">{{ t.page_not_found|default:"Page Not Found" }}</h2>
+    <p class="error-description">
+        {{ t.error_404_message|default:"Sorry, the page you're looking for doesn't exist or has been moved." }}
+    </p>
+    
+    <a href="{% if current_lang and current_lang != site.defaultLang %}/{{ current_lang }}/{% else %}/{% endif %}" class="home-link">
+        {{ t.go_home|default:"Go to Homepage" }}
+    </a>
+    
+    <div class="redirect-message">
+        <span class="spinner"></span>
+        <span>{{ t.redirecting_in|default:"Redirecting to homepage in" }} 5 {{ t.seconds|default:"seconds" }}...</span>
+    </div>
+</div>
+{% endblock %}

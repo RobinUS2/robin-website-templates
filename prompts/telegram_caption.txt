@@ -1,0 +1,49 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This post is created on behalf of {{.Domain}}.{{end}}
+
+Generate an engaging Telegram channel post for this content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Article URL: {{.ArticleURL}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write EVERYTHING in {{.Language}} language - this is critical!
+2. Keep the caption under 1024 characters (Telegram limit for posts with photos)
+3. Start with an attention-grabbing hook or question
+4. Include 1-3 relevant emojis that match the content theme
+5. Include the article link with a call-to-action in the SAME language:
+   - If {{.Language}} is English: "👉 Read more: {{.ArticleURL}}"
+   - If {{.Language}} is Dutch: "👉 Lees meer: {{.ArticleURL}}"
+   - Translate appropriately for other languages
+6. Generate 3-5 relevant hashtags (in English, hashtags are usually in English)
+7. Keep the tone {{.Tone}} but also informative
+8. Telegram allows more text than other platforms, so you can be descriptive
+
+IMPORTANT: The entire caption text MUST be in {{.Language}}. Do not mix languages.
+
+If this is quiz content, also generate a poll:
+- Extract the main question and answer options from the content
+- Identify the correct answer index (0-based)
+- Add a brief explanation for the correct answer
+
+Format your response as JSON:
+{
+  "caption": "the caption text with emojis and article URL",
+  "hashtags": ["hashtag1", "hashtag2"],
+  "poll": {
+    "question": "The quiz question (optional, only for quiz content)",
+    "options": ["Option A", "Option B", "Option C", "Option D"],
+    "correct_index": 0,
+    "explanation": "Brief explanation of the correct answer"
+  }
+}
+
+Note: The "poll" field is optional. Only include it if the content is clearly a quiz or trivia question.
+
+IMPORTANT: Return ONLY valid JSON, no additional text.

@@ -1,0 +1,178 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ site.name }} - {{ site_description|default:site.description }}{% endblock %}
+
+{% block og_title %}{{ site.name }} - {{ site_description|default:site.description }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="hero">
+        <h2>{{ site_description|default:site.description }}</h2>
+        <p class="hero-subtitle">
+            {{ t.hero_subtitle|default:"Expert content you can trust" }}
+        </p>
+    </section>
+    
+    <section class="posts">
+        <h3>{{ t.latest }} {{ site.content.format|title }}s</h3>
+        
+        {% if posts %}
+        <div class="post-grid">
+            {% for post in posts %}
+            <a href="{% if current_lang and current_lang != site.defaultLang %}/{{ current_lang }}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html{% else %}/posts/{{ post.title|slugify }}-{{ post.uuid|slice:":8" }}.html{% endif %}" class="post-card-link">
+                <article class="post-card">
+                    <h4>{{ post.title }}</h4>
+                    {% if site.show_excerpt %}
+                    <p class="excerpt">{{ post.content|cleanexcerpt|truncatewords:25 }}...</p>
+                    {% endif %}
+                    <div class="post-meta">
+                        <time datetime="{{ post.timestamp|dateformat:"iso" }}">
+                            {{ post.timestamp|dateformat:"short" }}
+                        </time>
+                        <span class="category">{{ site.content.category }}</span>
+                    </div>
+                    {% if post.tags %}
+                    <div class="tags">
+                        <span class="tags-label">{{ t.tags }}:</span>
+                        {% for tag in post.tags %}
+                            <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </article>
+            </a>
+            {% endfor %}
+        </div>
+        
+        {% if pagination %}
+        <nav class="pagination" aria-label="Pagination">
+            {% if pagination.has_prev %}
+            <a href="{{ pagination.prev_url }}" class="pagination-prev" rel="prev">
+                ← {{ t.previous|default:"Previous" }}
+            </a>
+            {% endif %}
+            
+            <span class="pagination-info">
+                {{ t.page|default:"Page" }} {{ pagination.current_page }} {{ t.of|default:"of" }} {{ pagination.total_pages }}
+            </span>
+            
+            {% if pagination.has_next %}
+            <a href="{{ pagination.next_url }}" class="pagination-next" rel="next">
+                {{ t.next|default:"Next" }} →
+            </a>
+            {% endif %}
+        </nav>
+        {% endif %}
+        
+        {% if archives %}
+        <div class="archives-link">
+            <h4>{{ t.older_posts|default:"Older Posts" }}</h4>
+            <div class="archive-list">
+                {% for archive in archives %}
+                <a href="{{ archive.url }}" class="archive-item">
+                    {{ archive.period }} ({{ archive.count }})
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="no-posts">
+            <p>{{ t.no_content }} {{ t.check_back_soon }} {{ site.content.format }}s!</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0 1.5rem;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.pagination-prev,
+.pagination-next {
+    padding: 0.4rem 0.9rem;
+    background: transparent;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.pagination-prev:hover,
+.pagination-next:hover {
+    background: var(--bg-secondary, #f8f8f8);
+    border-color: var(--text-secondary);
+    color: var(--text-color);
+}
+
+.pagination-info {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+}
+
+.archives-link {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color, #e8e8e8);
+}
+
+.archives-link h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0 0 0.75rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.archive-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.archive-item {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.archive-item:hover {
+    background: var(--bg-secondary, #f8f8f8);
+    border-color: var(--text-secondary);
+    color: var(--text-color);
+}
+</style>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.name }}",
+    "description": "{{ site.description }}",
+    "url": "{{ base_url }}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.name }}"
+    }
+}
+</script>
+{% endblock %}

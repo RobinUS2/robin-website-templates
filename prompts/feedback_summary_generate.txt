@@ -1,0 +1,22 @@
+You are analyzing user feedback for the site "{{.site_name}}" to identify patterns, trends, and actionable insights that can improve content generation.
+
+{{.feedback_context}}
+
+Based on this feedback, generate a comprehensive summary that:
+
+1. **Key Patterns**: Identify the most common reasons users rejected, deleted, or regenerated content
+2. **Content Issues**: Highlight specific content problems mentioned repeatedly
+3. **Quality Concerns**: Note any recurring quality, accuracy, or style issues
+4. **Improvement Opportunities**: Suggest specific improvements to content generation prompts or parameters
+5. **Positive Signals**: If feedback includes approvals or positive indicators, note what worked well
+
+Format your summary as markdown with clear sections. Be specific and actionable - this summary will be used to improve future content generation for this site.
+
+Focus on:
+- Specific content types or topics that received negative feedback
+- Patterns in rejection reasons (factual errors, tone issues, length problems, etc.)
+- Categories with higher rejection rates
+- Any temporal patterns (did feedback improve or worsen over time?)
+- Recommendations for prompt engineering or content parameter adjustments
+
+Generate a concise but comprehensive summary (500-800 words) that a content team can use to make data-driven improvements.

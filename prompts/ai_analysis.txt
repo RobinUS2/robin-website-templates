@@ -1,0 +1,21 @@
+Analyze the following article and determine how AI-generated it sounds on a scale of 0-100, where:
+- 0 = Completely human-written (natural, imperfect, personal voice)
+- 100 = Obviously AI-generated (robotic, generic, overly perfect)
+
+Provide your response in this exact format:
+SCORE: [number 0-100]
+FEEDBACK: [specific observations about what makes it sound AI-like or human-like, including suggestions for improvement if score > 30]
+
+Article to analyze:
+---
+{{.Content}}
+---
+
+Focus on these indicators:
+- Repetitive phrasing or sentence structures
+- Overly formal or robotic language
+- Lack of personal opinions or authentic voice
+- Generic statements without specific examples
+- Perfect grammar with no natural flow variations
+- Overuse of transitional phrases
+- Absence of contractions or conversational elements

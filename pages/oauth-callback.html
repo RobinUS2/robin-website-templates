@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization Complete</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            color: white;
+            font-size: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .info-box {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .notice {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: #1565C0;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .debug-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+        }
+        
+        .debug-title {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        <h1>Authorization Complete!</h1>
+        <p class="subtitle" id="platform-name">Successfully connected to platform</p>
+        
+        <div class="notice">
+            🔒 Your tokens have been securely stored and are only accessible to this application.
+        </div>
+        
+        <button class="btn" onclick="closeWindow()">Close Window</button>
+    </div>
+    
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                platform: params.get('platform'),
+                access_token: params.get('access_token'),
+                refresh_token: params.get('refresh_token'),
+                expires_in: params.get('expires_in'),
+                scope: params.get('scope')
+            };
+        }
+        
+        function displayTokens() {
+            const params = getQueryParams();
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state'); // Platform name from state parameter
+            
+            // Check if we have a code parameter (real OAuth flow)
+            if (code) {
+                // Get platform from state parameter or localStorage
+                const platform = state || localStorage.getItem('oauth_pending_platform');
+                
+                if (!platform) {
+                    document.getElementById('platform-name').textContent = 'Error: Platform not identified. Please try again.';
+                    return;
+                }
+                
+                // Clear pending platform
+                localStorage.removeItem('oauth_pending_platform');
+                
+                // Store the authorization code
+                const codeData = {
+                    platform: platform,
+                    code: code,
+                    timestamp: Date.now(),
+                    state: state
+                };
+                
+                const storageKey = `oauth_code_${platform.toLowerCase()}`;
+                localStorage.setItem(storageKey, JSON.stringify(codeData));
+                
+                document.getElementById('platform-name').textContent = `Authorization code received for ${platform.charAt(0).toUpperCase() + platform.slice(1)}`;
+                return;
+            }
+            
+            // Check if we have the required parameters for token flow
+            if (!params.platform || !params.access_token) {
+                document.getElementById('platform-name').textContent = 'Missing required parameters. Please try again.';
+                return;
+            }
+            
+            // Store tokens in localStorage
+            const tokenData = {
+                platform: params.platform,
+                access_token: params.access_token,
+                refresh_token: params.refresh_token,
+                expires_in: parseInt(params.expires_in) || 3600,
+                scope: params.scope,
+                timestamp: Date.now(),
+                expires_at: Date.now() + ((parseInt(params.expires_in) || 3600) * 1000)
+            };
+            
+            const storageKey = `oauth_token_${params.platform.toLowerCase()}`;
+            localStorage.setItem(storageKey, JSON.stringify(tokenData));
+            
+            // Read back from localStorage to verify
+            const storedData = localStorage.getItem(storageKey);
+            
+            // Update UI
+            document.getElementById('platform-name').textContent = `Successfully connected to ${params.platform}`;
+        }
+        
+        function closeWindow() {
+            // Try to close the window
+            window.close();
+            
+            // If window.close() doesn't work (some browsers prevent it), redirect back
+            setTimeout(() => {
+                window.location.href = '/oauth.html';
+            }, 100);
+        }
+        
+        // Initialize on page load
+        displayTokens();
+    </script>
+</body>
+</html>

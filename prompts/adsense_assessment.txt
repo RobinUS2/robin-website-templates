@@ -1,0 +1,36 @@
+You are a Google AdSense policy expert. Evaluate if this article meets Google AdSense quality guidelines for monetization.
+
+ARTICLE TITLE: {{.Title}}
+
+ARTICLE CONTENT:
+---
+{{.Content}}
+---
+
+Analyze based on these AdSense quality criteria:
+
+1. **Substantial Original Value**: Does it provide unique insights, not just rehashed information?
+2. **E-E-A-T (Experience, Expertise, Authoritativeness, Trust)**: Does it demonstrate genuine expertise?
+3. **User Intent**: Does it thoroughly answer what users are searching for?
+4. **Content Depth**: Is it comprehensive enough (not thin content)?
+5. **Natural Writing**: Does it sound human-written, not machine-generated?
+6. **Actionability**: Can users take practical action from this information?
+7. **Brand Safety**: Is it advertiser-friendly (no controversial, adult, or violent content)?
+8. **Engagement Quality**: Would users spend time on this page and trust the information?
+
+Provide your assessment in this EXACT format:
+
+ADSENSE_SCORE: [0-100 number - overall quality score for AdSense monetization]
+ADSENSE_READY: [YES or NO - YES if score >= 80, NO if score < 80]
+CONFIDENCE: [0-100 percentage]
+ISSUES: [List specific problems with severity rating, or "None" if score >= 80]
+RECOMMENDATIONS: [Specific actionable improvements to increase the score, prioritized by impact]
+
+Scoring guidelines:
+- 90-100: Exceptional - Premium advertiser content, expertly written
+- 80-89: Good - AdSense ready, minor improvements possible
+- 70-79: Fair - Needs improvement before monetization
+- 60-69: Mediocre - Significant issues to address
+- Below 60: Poor - Major rewrite needed
+
+Be critical but constructive. Focus on what would make this content genuinely valuable to users and advertisers.

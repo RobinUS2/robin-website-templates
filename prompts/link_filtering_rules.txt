@@ -1,0 +1,6 @@
+IMPORTANT FILTERING RULES:
+- SKIP obvious/basic links that a beginner-level user would already know
+- Assume the audience has foundational knowledge
+- ONLY suggest links that provide DEEP DIVE information, advanced techniques, or specialized knowledge
+- Avoid brand homepages or product overview pages unless they contain substantial educational content
+- Focus on tutorials, in-depth guides, academic resources, or expert-level content

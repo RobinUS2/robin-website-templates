@@ -1,0 +1,41 @@
+Analyze this article and generate 3-5 distinctive tags that capture its main topics and key concepts.
+
+Article Title: {{.Title}}
+
+Article Content Preview:
+---
+{{.ContentPreview}}
+---
+
+Site Category: {{.Category}}
+
+IMPORTANT RULES:
+1. DO NOT use generic site-level tags like "{{.Category}}", "music production", "cooking", etc.
+2. Focus on the PRIMARY topics, techniques, tools, or concepts covered in the article
+3. Tags should be broad enough to group similar articles together, but specific enough to be meaningful
+4. Prefer well-known terms, techniques, or tools over overly niche concepts
+5. Keep tags concise (1-2 words preferred, max 3 words)
+6. Use lowercase with hyphens for multi-word tags
+7. Avoid very similar tags (e.g., don't use both "reverb" and "reverb-technique")
+
+Examples of GOOD balanced tags for a music production site:
+- "compression"
+- "mixing"
+- "ableton"
+- "synthesis"
+- "mastering"
+- "edm"
+- "vocals"
+
+Examples of tags that are TOO SPECIFIC:
+- "strategic-silence-in-larry-heard-productions"
+- "emotional-high-points"
+- "specific-producer-pause-technique"
+
+Examples of BAD generic tags:
+- "music-production"
+- "tips"
+- "tutorial"
+- "guide"
+
+Respond with ONLY the tags, one per line, no numbering or bullets:

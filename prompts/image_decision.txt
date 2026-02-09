@@ -1,0 +1,25 @@
+Analyze this article and determine if visuals (images or SVG diagrams) would genuinely add value for the end user.
+
+Article Title: {{.Title}}
+
+Article Content:
+---
+{{.Content}}
+---
+
+Site Image Guidance: {{.ImageGuidance}}
+
+Please evaluate:
+1. Would visuals REALLY help the reader understand or engage with this content better?
+2. What type of visual would be most helpful?
+   - RASTER IMAGE: For photos, realistic scenes, equipment, environments (costs $0.02-0.04)
+   - SVG DIAGRAM: For technical diagrams, flowcharts, signal flows, architecture diagrams, process flows (free, better for technical content)
+3. What specific visual concept would be most helpful?
+
+Respond in this EXACT format:
+DECISION: [YES or NO]
+VISUAL_TYPE: [RASTER or SVG or NONE]
+REASON: [One sentence explaining why visuals would or wouldn't add value]
+PROMPT: [If YES, provide ONE detailed prompt. For SVG: describe the diagram structure. For RASTER: provide DALL-E prompt. If NO, write "NONE"]
+
+Be critical and selective - only approve visuals that truly enhance understanding or engagement. Prefer SVG for technical/diagrammatic content.

@@ -1,0 +1,150 @@
+<!-- Rendered: {{ now }} UTC -->
+<!DOCTYPE html>
+<html lang="{{ current_lang|default:site.defaultLang|default:"en" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description|default:site_description|default:site.description }}">
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    
+    <!-- Language and Canonical URLs -->
+    {% if canonical_urls %}
+        {% for lang_code, lang_info in canonical_urls %}
+            {% if lang_info.current %}
+                <link rel="canonical" href="{{ lang_info.url }}">
+            {% else %}
+                <link rel="alternate" hreflang="{{ lang_code }}" href="{{ lang_info.url }}">
+            {% endif %}
+        {% endfor %}
+        <!-- Default language canonical -->
+        {% if canonical_urls.en %}
+            <link rel="alternate" hreflang="x-default" href="{{ canonical_urls.en.url }}">
+        {% endif %}
+    {% endif %}
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}{{ site.name }}{% endblock %}">
+    <meta property="og:description" content="{{ description|default:site_description|default:site.description }}">
+    <meta property="og:url" content="{{ base_url }}{{ current_path|default:"" }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:locale" content="{{ current_lang|default:site.defaultLang|default:"en" }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="{{ site.social.twitter }}">
+    
+    <!-- Google AdSense -->
+    {% if site.adsense and site.adsense.enabled %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.publisher_id }}"
+            crossorigin="anonymous"></script>
+    {% endif %}
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body data-site-id="{{ site.id }}"{% if site.id == "musicproducers_info" %} class="dark-theme"{% endif %}>
+    <!-- Debug markers for asset loading validation -->
+    <div id="debug-nocss" class="debug-nocss" style="position: fixed; top: 10px; left: 10px; background: red; color: white; padding: 10px; font-size: 20px; z-index: 9999;">NOCSS</div>
+    <div id="debug-nojs" style="position: fixed; top: 50px; left: 10px; background: orange; color: white; padding: 10px; font-size: 20px; z-index: 9999;">NOJS</div>
+    
+    <header>
+        <div class="container">
+            {% if current_lang and current_lang != site.defaultLang %}
+                <h1>
+                    {% if site.hasLogo %}
+                        <a href="/{{ current_lang }}/"><img src="/assets/logo.webp" alt="{{ site.name }}" class="site-logo" width="200" height="50"></a>
+                    {% else %}
+                        <a href="/{{ current_lang }}/">{{ site.name }}</a>
+                    {% endif %}
+                </h1>
+            {% else %}
+                <h1>
+                    {% if site.hasLogo %}
+                        <a href="/"><img src="/assets/logo.webp" alt="{{ site.name }}" class="site-logo" width="200" height="50"></a>
+                    {% else %}
+                        <a href="/">{{ site.name }}</a>
+                    {% endif %}
+                </h1>
+            {% endif %}
+            <nav>
+                {% if current_lang and current_lang != site.defaultLang %}
+                    <a href="/{{ current_lang }}/">{{ t.nav_home }}</a>
+                {% else %}
+                    <a href="/">{{ t.nav_home }}</a>
+                {% endif %}
+                {% if current_lang and current_lang != site.defaultLang %}
+                    <a href="/{{ current_lang }}/about.html">{{ t.nav_about }}</a>
+                {% else %}
+                    <a href="/about.html">{{ t.nav_about }}</a>
+                {% endif %}
+                {% block extra_nav %}{% endblock %}
+                
+                <!-- Language Switcher -->
+                {% if site.languages and site.languages|length > 1 and canonical_urls %}
+                <div class="language-switcher">
+                    {% for lang_code, lang_info in canonical_urls %}
+                        <a href="{{ lang_info.url|stripbaseurl:base_url }}" 
+                           class="{% if lang_info.current %}current-lang{% endif %}" 
+                           hreflang="{{ lang_code }}">{{ lang_info.name }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; {{ current_year }} {{ site.name }}. {{ t.all_rights_reserved }}</p>
+            <nav class="footer-links">
+                {% if current_lang and current_lang != site.defaultLang %}
+                    <a href="/{{ current_lang }}/disclaimer.html">{{ t.disclaimer|default:"Disclaimer" }}</a>
+                {% else %}
+                    <a href="/disclaimer.html">{{ t.disclaimer|default:"Disclaimer" }}</a>
+                {% endif %}
+            </nav>
+            {% if site.social.instagram or site.social.twitter or site.social.youtube or site.social.tiktok or site.social.facebook %}
+            <div class="social">
+                {% if site.social.instagram %}
+                    <a href="https://instagram.com/{{ site.social.instagram }}" target="_blank" rel="noopener">Instagram</a>
+                {% endif %}
+                {% if site.social.twitter %}
+                    <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener">Twitter</a>
+                {% endif %}
+                {% if site.social.youtube %}
+                    <a href="https://youtube.com/{{ site.social.youtube }}" target="_blank" rel="noopener">YouTube</a>
+                {% endif %}
+                {% if site.social.tiktok %}
+                    <a href="https://tiktok.com/{{ site.social.tiktok }}" target="_blank" rel="noopener">TikTok</a>
+                {% endif %}
+                {% if site.social.facebook %}
+                    <a href="https://facebook.com/{{ site.social.facebook }}" target="_blank" rel="noopener">Facebook</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </footer>
+    
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent" style="display: none;">
+        <div class="cookie-content">
+            <p>{{ t.cookie_message|default:"We use cookies to improve your experience and analyze site traffic. By clicking 'Accept', you consent to our use of cookies." }}</p>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="cookie-btn accept">{{ t.cookie_accept|default:"Accept" }}</button>
+                <button id="declineCookies" class="cookie-btn decline">{{ t.cookie_decline|default:"Decline" }}</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Global JavaScript -->
+    <script src="/assets/main.js"></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

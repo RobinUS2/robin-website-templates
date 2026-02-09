@@ -1,0 +1,52 @@
+Review and improve the following content to maximize AdSense value and reader engagement.
+
+TITLE: {{.Title}}
+
+CURRENT CONTENT:
+{{.Content}}
+
+FEEDBACK TO ADDRESS:
+{{.Feedback}}
+
+YOUR TASK: Improve the article to address the feedback while maintaining its core message and style.
+
+QUALITY CHECKLIST:
+1. **Grab attention immediately** - compelling hook in first paragraph
+2. **E-E-A-T (Experience, Expertise, Authoritativeness, Trust)**: Does it demonstrate genuine expertise?
+3. **Provide unique value** - insights readers can't easily find elsewhere
+4. **Keep it scannable** - use headers, short paragraphs, bullet points where helpful
+5. **Include actionable takeaways** - specific steps or measurements
+6. **Optimize for search intent** - directly answer what readers are looking for
+7. **Write in a natural, human voice** - use contractions, vary sentence length, sound conversational
+8. **Make it genuinely valuable** - readers should learn something they can't find elsewhere
+9. **Keep it advertiser-friendly** - family-safe, professional, trustworthy
+10. **Demonstrate E-E-A-T** - show experience, expertise, authoritativeness, and trustworthiness
+
+ADSENSE QUALITY GUIDELINES:
+- **Original and unique**: Content must be original, not copied, written based on expertise and experience
+- **Valuable and informative**: Offer unique, interesting, useful content that clearly describes the topic
+- **Good quality**: Well-written, free of excessive repetition or keyword stuffing
+- **Relevant to visitors**: Relevant to the site's audience and provides value to advertisers
+- **Policy compliant**: Must not violate AdSense policies (no nudity, sexually suggestive material, hate speech, etc.)
+
+STRICT AUTHENTICITY RULES:
+- **NEVER invent fake personal experiences, stories, or anecdotes** about the author
+- **NEVER add fabricated "I did X" or "In my experience with Y" claims** that weren't in the original
+- **NEVER make up specific personal achievements, credentials, or client work**
+- **NEVER fabricate concrete examples that present fiction as fact**
+- **NEVER invent fake names, fake quotes, or fake testimonials**
+- **REWRITE personal claims to generic form**: Change "I tested" → "one can test", "I discovered" → "it's possible to discover", "I noticed" → "it becomes apparent"
+- **DO focus on technical knowledge, industry insights, and factual information**
+- **DO use general experience framing** like "producers often find...", "one can achieve...", "it's possible to..."
+- **DO add value through accurate information, not invented credibility**
+- If the original has personal experience, keep it; if not, DON'T ADD FAKE ONES
+
+CONTENT PRESERVATION RULES:
+- **DO NOT add new images** - keep only the images already in the content
+- **DO NOT add new external links** - keep only the links already in the content
+- **DO NOT remove existing images or links** unless they're broken or irrelevant
+- **DO NOT add "About the Author" sections or author bios**
+- Focus on improving the TEXT QUALITY, not adding new media or references
+{{.PreserveFormatting}}
+
+Write the improved article below (include the full article, not just changes):

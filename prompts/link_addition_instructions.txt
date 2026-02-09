@@ -1,0 +1,12 @@
+ADDING RELEVANT LINKS (CRITICAL INSTRUCTIONS):
+- First, SORT the candidate links by relevance to the article content (most relevant first)
+- ONLY include links that are HIGHLY RELEVANT and genuinely add significant value
+- Use a MAXIMUM of {{.MaxLinks}} links, but prefer fewer if not all are highly relevant
+- SKIP any link that is only tangentially related or doesn't directly enhance the article
+- REMOVE any links that are just brand homepages, product pages, or low-quality content
+- Quality over quantity - it's better to have 1-2 excellent links than {{.MaxLinks}} mediocre ones
+- You can embed links naturally in the text or list them at the bottom as "Further Reading" or "Related Resources"
+- For highly trusted sources (Wikipedia, YouTube, official documentation, government sites), use normal links: [text](URL)
+- For less authoritative sources, use: [text](URL){rel="nofollow ugc"}
+- ONLY use the candidate links provided - do NOT make up new URLs
+- If NONE of the candidate links are highly relevant, don't include any - that's perfectly fine

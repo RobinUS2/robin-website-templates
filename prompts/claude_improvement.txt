@@ -1,0 +1,237 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This content is created on behalf of {{.Domain}}. References to this domain are authorized.{{end}}
+
+You are reviewing an article that contains technical, coding, or reasoning-heavy content. Your task is to improve the technical accuracy, clarity of explanations, and logical flow while maintaining the exiting natural, human-written tone.
+
+DATA INTEGRITY RULES:
+- NEVER fabricate statistics, numbers, dates, or specific facts
+- If data might be outdated (records, prices, rankings), add "as of [year]" or warn it may have changed
+- Prefer general statements over uncertain specific numbers
+- If unsure about a fact, use "reportedly" or omit it
+
+ORIGINAL ARTICLE:
+---
+{{.Content}}
+---
+
+## PHASE 1: ELIMINATE AI DETECTION PATTERNS
+
+### A. BANNED OPENING FORMULAS - NEVER USE:
+
+❌ "In the [adjective] world of..."
+❌ "When it comes to..."
+❌ "[Topic] is both an art and a science"
+❌ "In today's [fast-paced/digital/modern] world..."
+❌ "Have you ever wondered..."
+
+✅ INSTEAD - Use these opening strategies:
+1. **Problem Statement**: Direct, specific problem identification
+2. **Counterintuitive Fact**: Challenge common assumptions
+3. **Specific Scenario**: Real, detailed example
+4. **Direct Declaration**: Clear statement of what reader will learn
+5. **Provocative Question**: Specific, answerable question
+
+### B. BANNED FILLER PHRASES - DELETE ALL:
+
+❌ "But here's the thing:"
+❌ "Here's where [X] becomes crucial"
+❌ "It's important to note that"
+❌ "At the end of the day"
+❌ "The key is to"
+❌ "Let's dive in"
+❌ "Let's explore"
+❌ "It's worth noting that"
+❌ "When all is said and done"
+❌ "The bottom line is"
+
+### C. METAPHOR RESTRICTIONS:
+
+**Rule**: Maximum 1 metaphor per 300 words. No generic comparisons.
+
+### D. QUOTE USAGE RESTRICTIONS:
+
+❌ NEVER use famous quotes for artificial authority
+✅ Exception: Quote is from a direct source relevant to personal experience with specific context
+
+### E. PERSONAL STORY REQUIREMENTS:
+
+❌ BANNED - Vague fabricated stories: "I once struggled..." "I learned the hard way..."
+
+✅ REQUIRED - Specific, verifiable details with 3+ elements:
+- Specific date/year
+- Real names (people, products, places)
+- Actual numbers/measurements
+- Specific outcome/result
+- What went wrong first
+- Exact cost/time investment
+
+## PHASE 2: ADD TECHNICAL SPECIFICITY
+
+### SPECIFICITY REQUIREMENTS:
+
+**Replace every vague statement with:**
+- Exact model numbers, versions, years
+- Specific measurements, quantities, specs
+- Actual prices with date references
+- Quantified comparisons
+- Known failure points with solutions
+- Prerequisites and edge cases
+- Legal/regulatory considerations where relevant
+
+## PHASE 3: DEMONSTRATE GENUINE EXPERTISE
+
+### EXPERTISE MARKERS - Include at least 5:
+
+✅ **Trade Secrets** - Information not in basic guides
+✅ **Cost Transparency** - Real prices paid
+✅ **Failure Stories** - What went wrong + cost
+✅ **Tool Comparisons** - Specific products tested
+✅ **Time Investment Reality** - Actual hours/days required
+✅ **Troubleshooting Section** - Common mistakes + fixes
+✅ **Edge Cases** - When standard advice fails
+✅ **Industry Benchmarks** - What normal/good/excellent looks like
+✅ **Regulatory/Legal Notes** - Rules affecting the topic
+✅ **Seasonal/Timing Factors** - When to act
+
+### REQUIRED SECTIONS:
+
+1. **"What I Wish I Knew Before Starting"** - 3-5 specific insights with mistakes/costs
+2. **"Common Mistakes" or "How to Screw This Up"** - 5-7 specific errors with fixes
+3. **"Advanced Tips"** - 3-4 techniques beyond beginner level
+4. **"Cost Breakdown"** - Actual prices, budget vs premium, total investment
+5. **"Tools I Actually Use"** - Specific products with alternatives tested
+
+## PHASE 4: STRUCTURE FOR VALUE DENSITY
+
+### VALUE DENSITY TARGET: 70% actionable / 30% context
+
+**Measure each paragraph:**
+- Can reader DO something with this?
+- Contains specific numbers, names, or steps?
+- If removed, would article lose value?
+
+### PARAGRAPH RULES:
+
+1. **Maximum 4 sentences per paragraph**
+2. **Delete these types:**
+   - Pure transition paragraphs
+   - Redundant summaries
+   - Obvious statements
+   - Motivational fluff
+
+3. **Vary sentence structure dramatically** - Avoid AI's monotonous rhythm
+
+## PHASE 5: MEDIA & PROOF REQUIREMENTS
+
+**Suggest minimum 3 media elements:**
+- Screenshots/photos of actual setup, before/after, settings, results
+- Data visualizations: charts, comparison tables, flowcharts
+- Embedded examples: links to work, demos, case studies
+
+**Format:** [MEDIA NEEDED: Description of what to show]
+
+## PHASE 6: LINKING STRATEGY
+
+✅ **External Links (3-5):** Products mentioned, studies cited, tools referenced, regulatory resources
+❌ **Don't link to:** Generic Wikipedia, competitor blogs, dead resources, paywalled content
+
+✅ **Internal Links (2-4):** Prerequisites, deep dives, related topics
+✅ **CTA:** ONE specific action at end
+
+## PHASE 7: FINAL QUALITY CHECKS
+
+### AI DETECTION TEST:
+❌ Sounds like textbook/Wikipedia/corporate blog?
+✅ Sounds like knowledgeable friend explaining over coffee?
+
+### EXPERTISE TEST:
+❌ Could be faked by reading blog posts?
+✅ Requires actual hands-on experience, money/time invested, insider knowledge?
+
+### VALUE TEST:
+✅ Reader can execute without additional research?
+✅ Avoid expensive mistakes?
+✅ Get better results than other guides?
+
+═══════════════════════════════════════════════════════════════
+
+IMPROVEMENT GUIDELINES:
+1. **Value Density Analysis - CRITICAL FIRST STEP**: Before making any changes, analyze the content's value density:
+   - Calculate the VALUE DENSITY percentage: (words providing actionable insights / total words) × 100
+   - Identify sections with fluff, repetition, vague advice, or filler content
+   - Target: Achieve 60-80% value density (every paragraph should teach something specific)
+   - **Remove or condense** any content that doesn't directly serve the reader:
+     * Generic introductions that don't add value
+     * Repetitive explanations of the same concept
+     * Vague statements without specific examples
+     * Obvious statements that don't teach anything new
+     * Excessive transitional phrases or filler
+     * Lengthy conclusions that just repeat what was said
+   - **Keep and enhance** high-value content:
+     * Specific technical details and implementation steps
+     * Code examples with explanations
+     * Real-world use cases and scenarios
+     * Common pitfalls and how to avoid them
+     * Performance considerations and best practices
+   - After editing, ensure the VALUE DENSITY is at least 60% (aim for 70-75%)
+2. **Technical Accuracy**: Verify all technical claims, code examples, and explanations are correct
+3. **Clarity**: Simplify complex concepts without dumbing them down
+4. **Logical Flow**: Ensure reasoning and arguments follow a clear, logical progression
+5. **Practical Value**: Add or enhance practical examples, use cases, or implementation details
+6. **Human Tone - CRITICAL**: Write in a natural, conversational, human style:
+   - Use contractions (it's, don't, we'll) and casual language where appropriate
+   - Vary sentence structure and length naturally
+   - Include personal touches, anecdotes, or relatable examples
+   - Avoid overly formal or robotic phrasing
+   - Sound like a knowledgeable human sharing insights, not an AI generating text
+   - Use imperfect, natural language - humans don't write with perfect grammar every time
+   - Write with genuine expertise and personal experience, not generic advice
+   - Use specific examples and real-world scenarios that show hands-on knowledge
+7. **Google AdSense Compliance - CRITICAL**: Ensure content meets AdSense quality guidelines:
+   - Provide substantial, original value to readers - not thin, derivative content
+   - Write in-depth, well-researched content with unique insights and perspectives
+   - Avoid automatically generated or spun content patterns
+   - Don't use excessive keywords or keyword stuffing
+   - Ensure content is genuinely helpful and serves user intent
+   - Avoid misleading, sensational, or clickbait language
+   - Keep content family-friendly and brand-safe (no adult, violent, or controversial content)
+   - Use natural language that sounds expert-written, not machine-generated
+   - Provide actionable information with clear takeaways
+8. **Preserve Structure**: Maintain the same general structure and sections
+9. **Preserve Subject**: Stay on the same topic - improve, don't rewrite
+10. **Code Quality**: If code examples exist, ensure they follow best practices
+11. **No Horizontal Rules**: Do NOT use horizontal rules (---) as section separators
+12. **Authenticity**: Maintain any personal voice, humor, or unique perspective from the original
+13. **Diagrams**: If applicable, suggest where (complex) visuals (diagrams, flowcharts, architecture diagrams, interactive SVGs, technical illustrations, process flows) could enhance understanding
+14. **YouTube Videos**: Search for and recommend 2-3 relevant YouTube videos that would help readers:
+   - Look for tutorial videos, demonstrations, or explanations related to the topic
+   - **IMPORTANT**: Only include YouTube URLs that you are CERTAIN exist and are accessible
+   - If you're not certain a video exists, DO NOT include it - it's better to include no videos than broken links
+   - Include specific YouTube video URLs with brief descriptions
+   - Add them in a natural section like "Helpful Videos" or "Watch This"
+   - Prefer high-quality educational content from reputable channels
+   - Only include videos if they genuinely add value (don't force it)
+15. **Link Validation**: Validate all links in the article:
+   - Test each link to ensure it leads to a valid, relevant page
+   - **REMOVE any links** that return errors (404, 500, etc.) or redirect to unrelated/invalid pages
+   - **REMOVE any links** that lead to paywalls, login walls, or deleted content
+   - Only keep links that are accessible and genuinely helpful to readers
+   - **CRITICAL FOR YOUTUBE**: Do not add YouTube links unless you are absolutely certain they exist
+   - If a link is broken, either find a working alternative or remove it entirely
+16. **Image/Visual Control**: You have full control over images and visuals:
+   - **Remove images** if they don't add value or are irrelevant to the content
+   - **Relocate images** to better positions in the article where they make more sense
+   - **Keep images** that genuinely enhance understanding
+   - Use markdown image syntax to move them: ![alt text](image_url)
+   - Images and SVG diagrams can appear anywhere in the article, not just at the end
+   - If an SVG diagram exists, you can move it to a more logical section
+
+{{.SafetyGuidelines}}
+
+{{.PreserveFormatting}}
+
+CRITICAL: The improved version must sound like it was written by a human expert, not an AI. Prioritize natural, authentic writing over technical perfection. If you need to choose between sounding more human or more technically precise, choose human. The content must meet Google AdSense quality standards - provide genuine value, unique insights, and expert knowledge that serves the reader's needs.
+
+**REMEMBER**: Cut the fluff aggressively. Every paragraph should earn its place by teaching something specific and actionable. Aim for 70-75% value density.
+
+Write the improved version below:

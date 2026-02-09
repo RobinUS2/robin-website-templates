@@ -1,0 +1,267 @@
+/**
+ * {{ site.name }} - Global JavaScript
+ * Generated on {{ current_date }}
+ */
+
+(function() {
+    'use strict';
+
+    // Site configuration (template variables will be replaced during build)
+    const siteConfig = {
+        name: '{{site.name}}',
+        domain: '{{site.domain}}', 
+        language: '{{site.language|default:"en"}}',
+        analytics: {
+            gtag: '{{site.analytics_gtag|default:""}}'
+        },
+        features: {
+            smoothScroll: true,
+            lazyLoading: true,
+            analytics: {% if site.enable_analytics %}true{% else %}false{% endif %}
+        }
+    };
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('{{ site.name }} - Site initialized');
+        
+        // Hide NOJS debug marker when JavaScript loads
+        const nojsMarker = document.getElementById('debug-nojs');
+        if (nojsMarker) {
+            nojsMarker.style.display = 'none';
+        }
+        
+        // Initialize site features
+        initSmoothScroll();
+        initLazyLoading();
+        initNavigation();
+        initCookieConsent();
+        
+        // Site-specific initialization
+        if (typeof window.siteInit === 'function') {
+            window.siteInit(siteConfig);
+        }
+    });
+
+    /**
+     * Enable smooth scrolling for anchor links
+     */
+    function initSmoothScroll() {
+        if (!siteConfig.features.smoothScroll) return;
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+
+    /**
+     * Initialize lazy loading for images
+     */
+    function initLazyLoading() {
+        if (!siteConfig.features.lazyLoading || !('IntersectionObserver' in window)) return;
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+
+    /**
+     * Initialize navigation enhancements
+     */
+    function initNavigation() {
+        // Add active state to current page nav links
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPath || 
+                (currentPath !== '/' && currentPath.includes(link.getAttribute('href')))) {
+                link.classList.add('active');
+            }
+        });
+
+        // Mobile menu toggle (if mobile menu exists)
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        if (mobileToggle && nav) {
+            mobileToggle.addEventListener('click', () => {
+                nav.classList.toggle('mobile-open');
+            });
+        }
+    }
+
+    /**
+     * Cookie Consent Management
+     */
+    function initCookieConsent() {
+        const COOKIE_NAME = 'cookie_consent';
+        const COOKIE_EXPIRY_DAYS = 365;
+        
+        // Check if user has already made a choice
+        const consent = getCookie(COOKIE_NAME);
+        
+        if (consent === 'accepted') {
+            // User has accepted, load analytics
+            initAnalytics();
+        } else if (consent === 'declined') {
+            // User has declined, don't show banner or load analytics
+            return;
+        } else {
+            // No choice made yet, show banner
+            showCookieBanner();
+        }
+    }
+    
+    function showCookieBanner() {
+        const banner = document.getElementById('cookieConsent');
+        if (!banner) return;
+        
+        banner.style.display = 'block';
+        
+        // Accept button
+        document.getElementById('acceptCookies')?.addEventListener('click', function() {
+            setCookie('cookie_consent', 'accepted', 365);
+            hideCookieBanner();
+            initAnalytics();
+        });
+        
+        // Decline button
+        document.getElementById('declineCookies')?.addEventListener('click', function() {
+            setCookie('cookie_consent', 'declined', 365);
+            hideCookieBanner();
+        });
+    }
+    
+    function hideCookieBanner() {
+        const banner = document.getElementById('cookieConsent');
+        if (banner) {
+            banner.style.animation = 'slideDown 0.4s ease-out';
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 400);
+        }
+    }
+    
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+    }
+    
+    function getCookie(name) {
+        const nameEQ = name + '=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    
+    /**
+     * Initialize analytics if enabled (called after consent)
+     */
+    function initAnalytics() {
+        if (!siteConfig.features.analytics || !siteConfig.analytics.gtag) return;
+        
+        // Google Analytics 4
+        if (siteConfig.analytics.gtag) {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.gtag}`;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', siteConfig.analytics.gtag);
+            
+            // Make gtag available globally
+            window.gtag = gtag;
+        }
+        
+        // Track page views
+        trackPageView();
+    }
+
+    /**
+     * Track page view for analytics
+     */
+    function trackPageView() {
+        if (typeof gtag === 'function') {
+            gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href
+            });
+        }
+    }
+
+    /**
+     * Utility functions available globally
+     */
+    window.siteUtils = {
+        config: siteConfig,
+        
+        // Debounce function for performance
+        debounce: function(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+        
+        // Simple API for tracking events
+        track: function(eventName, properties = {}) {
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, properties);
+            }
+            console.log('Event tracked:', eventName, properties);
+        },
+        
+        // Format date helper
+        formatDate: function(date, locale = 'en-US') {
+            return new Intl.DateTimeFormat(locale, {
+                year: 'numeric',
+                month: 'long', 
+                day: 'numeric'
+            }).format(new Date(date));
+        }
+    };
+
+    // Expose config globally for debugging
+    if (console && console.log) {
+        window.siteDebug = {
+            config: siteConfig,
+            version: '1.0.0',
+            generated: '{{ current_date }}'
+        };
+    }
+
+})();

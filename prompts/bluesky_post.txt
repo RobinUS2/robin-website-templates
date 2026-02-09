@@ -1,0 +1,41 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This post is created on behalf of {{.Domain}}.{{end}}
+
+Generate an engaging Bluesky post for this content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+Article URL: {{.URL}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write in {{.Language}} language
+2. STRICT LIMIT: Maximum 300 characters total (including spaces, emojis, hashtags, and URL)
+3. Create a thoughtful, engaging post
+4. Include 1-2 relevant emojis that match the content
+5. CRITICAL: Include the EXACT article URL provided above ({{.URL}}) - do NOT shorten or modify it
+6. Add 2-4 relevant hashtags that fit within the 300 character limit
+   - Focus on community and discovery
+   - Use descriptive, searchable hashtags
+   - Return hashtags WITHOUT # prefix (we'll add them)
+7. Keep the tone {{.Tone}}
+8. Encourage meaningful discussion
+
+Bluesky community values:
+- Authentic, thoughtful content over viral clickbait
+- Building genuine connections and conversations
+- Supporting independent creators and niche communities
+- More relaxed and conversational than Twitter
+
+Format your response as JSON:
+{
+  "text": "the post text with emojis and URL",
+  "hashtags": ["hashtag1", "hashtag2", "hashtag3"]
+}
+
+CRITICAL: The complete post (text + hashtags with # + spaces) MUST be under 300 characters.
+IMPORTANT: Return ONLY valid JSON, no additional text.

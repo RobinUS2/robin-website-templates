@@ -1,0 +1,37 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This pin is created on behalf of {{.Domain}}.{{end}}
+
+Generate an engaging Pinterest pin for this content:
+
+Title: {{.Title}}
+Content Preview: {{.ContentPreview}}
+Site: {{.SiteName}}
+Target Audience: {{.TargetAudience}}
+Category: {{.Category}}
+
+{{.SafetyGuidelines}}
+
+Requirements:
+1. Write in {{.Language}} language
+2. Create a compelling title (max 100 characters) - This appears above the pin image
+3. Write an engaging description (max 500 characters) that:
+   - Hooks the reader immediately
+   - Explains the value or insight
+   - Includes a call-to-action
+   - Uses 1-2 relevant emojis naturally (not forced)
+4. Keep the tone {{.Tone}} and inspirational (Pinterest users seek ideas and inspiration)
+5. Generate 3-5 highly relevant hashtags:
+   - Use popular Pinterest keywords (e.g., #QuizNight, #Trivia, #LearnSomethingNew)
+   - Make them discoverable and niche-specific
+   - Return hashtags WITHOUT # prefix (we'll add them)
+6. Focus on value, discovery, and "pin-worthy" appeal
+7. Pinterest is a visual discovery platform - emphasize visual/educational appeal
+
+Format your response as JSON:
+{
+  "title": "the pin title",
+  "description": "the pin description with emojis and CTA",
+  "hashtags": ["hashtag1", "hashtag2", ...]
+}
+
+IMPORTANT: Return ONLY valid JSON, no additional text.

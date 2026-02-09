@@ -1,0 +1,46 @@
+CURRENT DATE: {{.CurrentDate}}
+{{if .Domain}}WORKING CONTEXT: This content is created on behalf of {{.Domain}}. References to this domain are authorized.{{end}}
+
+Review the following article for CRITICAL safety and legal risks only. Focus on truly dangerous content:
+
+1. PHYSICAL SAFETY: Dangerous advice that could cause physical harm, injury, or equipment damage
+2. LEGAL RISK: Specific financial advice (ROI estimates, income predictions), medical/health claims, or definitive legal advice
+3. UNVERIFIABLE PERSONAL CLAIMS: Specific personal achievements, credentials, client work, or "I did X" claims that cannot be verified
+4. EXPLICIT CONTENT: Explicit, offensive, or highly unprofessional content
+5. FABRICATED DATA: Made-up statistics, numbers, dates, or facts that could mislead readers
+6. OUTDATED INFORMATION: Time-sensitive data (records, rankings, prices, statistics) presented as current without date qualification
+
+Article to review:
+---
+{{.Content}}
+---
+
+Your task:
+1. Identify any sections that pose CRITICAL safety or legal risks
+2. Remove ONLY those specific dangerous sections
+3. Clean up any placeholder text like [INSERT IMAGE], [TODO], [PLACEHOLDER], [MEDIA NEEDED], [IMAGE NEEDED], [LINK NEEDED], [VIDEO NEEDED], [EXAMPLE NEEDED], etc.
+4. Replace all em dashes (—) and en dashes (–) with regular hyphens (-)
+5. Return the cleaned, safe version of the article
+
+Provide your response in this exact format:
+SAFE: [YES or NO]
+CONCERN_TYPE: [NONE if safe, CLEANABLE if issues can be fixed by cleaning, MUST_FAIL if content has fabricated/unverifiable facts that cannot be salvaged]
+CONCERNS: [If not safe, list what was found. If safe, write "None"]
+CLEANED_CONTENT:
+[Full article text with dangerous sections removed and placeholders cleaned]
+
+CONCERN TYPE GUIDELINES:
+- NONE: Content is safe, no issues found
+- CLEANABLE: Issues like placeholder text, tone problems, minor claims that can be reworded to generic form - proceed with cleaned content
+- MUST_FAIL: Content contains FABRICATED historical facts, fake origin stories, invented statistics, or unverifiable claims presented as truth that CANNOT be simply cleaned - this content should be rejected entirely and regenerated
+
+IMPORTANT GUIDELINES:
+- General factual accuracy without sources is ACCEPTABLE - only flag if dangerously wrong
+- Technical advice within the site's domain is ACCEPTABLE - this is expected content
+- Business/career general guidance is ACCEPTABLE (e.g., "build a following", "be consistent")
+- Specific financial predictions or ROI estimates are NOT ACCEPTABLE (e.g., "you'll earn $X", "expect 20%% ROI")
+- General encouragement about career potential is ACCEPTABLE - only flag specific income promises
+- Focus on SERIOUS issues that could cause harm or legal liability
+- Minor factual imperfections or stylistic choices are fine
+- Remove ALL placeholder patterns including: [INSERT IMAGE], [TODO], [LINK HERE], [MEDIA NEEDED], [IMAGE NEEDED], [LINK NEEDED], [VIDEO NEEDED], [EXAMPLE NEEDED], etc.
+- Replace ALL em dashes (—) and en dashes (–) with regular hyphens (-) for consistent typography
