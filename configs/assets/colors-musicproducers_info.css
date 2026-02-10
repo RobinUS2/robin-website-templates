@@ -1,0 +1,20 @@
+/* Music Producers Info Color Scheme */
+:root {
+    /* Music Producers Info Brand Colors (from logo) */
+    --primary-color: #007878;      /* Teal */
+    --primary-dark: #005a5a;       /* Dark Teal */
+    --primary-light: #00a0a0;      /* Light Teal */
+    --accent-color: #006e82;       /* Teal-Cyan */
+    --text-dark: #0f0e0d;          /* Almost black from logo */
+    --text-light: #666;
+    --background: #f5f5f5;
+    --card-background: #fff;
+}
+
+/* Dark theme override - applied via body class */
+body.dark-theme {
+    --text-dark: #e8e8e8;          /* Light text for dark mode */
+    --text-light: #b0b0b0;         /* Medium gray for secondary text */
+    --background: #0f0e0d;         /* Dark background from logo */
+    --card-background: #1a1918;    /* Slightly lighter dark for cards */
+}

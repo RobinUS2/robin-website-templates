@@ -1,0 +1,62 @@
+/* Quiz Reps Color Scheme - Based on Brain Logo */
+:root {
+    --primary-color: #2B4C7E;      /* Navy blue from logo background */
+    --primary-dark: #1a2f4f;       /* Darker navy */
+    --primary-light: #3d6ba8;      /* Lighter blue */
+    --accent-color: #00D9FF;       /* Cyan/turquoise from brain outline */
+    --accent-orange: #FF9500;      /* Orange from arrows */
+    --accent-yellow: #FFB800;      /* Yellow from arrows */
+    --secondary-color: #00D9FF;    /* Cyan for interactive elements */
+    --text-dark: #1a2f4f;          /* Dark navy for text */
+    --text-light: #3d5a7a;         /* Darker blue-gray for secondary text (improved contrast) */
+    --background: #F5F9FC;         /* Very light blue-tinted background */
+    --card-background: #FFFFFF;    /* White for cards */
+    --brain-cyan: #00D9FF;         /* Brain outline color */
+    --arrow-orange: #FF9500;       /* Arrow gradient start */
+    --arrow-yellow: #FFB800;       /* Arrow gradient end */
+}
+
+/* Quiz site hero uses cyan and navy gradient */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+/* Quiz site tags use cyan accent */
+.tag {
+    background: #F0FAFF;
+    color: var(--primary-color);
+    border-color: var(--accent-color);
+}
+
+.tag:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Quiz site category uses cyan with orange accent */
+.category,
+.post-category {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-orange) 100%);
+    color: white;
+    font-weight: 600;
+}
+
+/* Quiz site language switcher uses cyan for active */
+.language-switcher a.current-lang {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.language-switcher a:hover {
+    background-color: var(--accent-orange);
+    color: white;
+}
+
+/* Dark theme adjustments for quiz site */
+body.dark-theme {
+    --primary-color: #00D9FF;
+    --text-dark: #E5F4FF;
+    --background: #0f1c2e;
+    --card-background: #1a2f4f;
+}

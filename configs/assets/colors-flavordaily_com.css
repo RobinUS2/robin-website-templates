@@ -1,0 +1,12 @@
+/* Flavor Daily Color Scheme */
+:root {
+    /* Default color scheme for Flavor Daily */
+    --primary-color: #007878;      /* Teal */
+    --primary-dark: #005a5a;       /* Dark Teal */
+    --primary-light: #00a0a0;      /* Light Teal */
+    --accent-color: #006e82;       /* Teal-Cyan */
+    --text-dark: #0f0e0d;          /* Almost black */
+    --text-light: #666;
+    --background: #f5f5f5;
+    --card-background: #fff;
+}
